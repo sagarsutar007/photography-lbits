@@ -1,0 +1,74 @@
+.title_txt {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+}
+.label_txt {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.input_group_text {
+  font-family: "Lato", sans-serif;
+  background-color: #ffffff;
+  border-color: #000080;
+  border-right: none !important;
+}
+
+.form_control {
+  border-left: none !important;
+  outline: none;
+  box-shadow: none;
+  border-color: #000080;
+  font-family: "Lato", sans-serif;
+}
+
+.form_control:focus {
+  box-shadow: none;
+  border-color: #000080;
+}
+
+.btn_primary {
+  background: #000080;
+  border-color: #000080;
+  font-family: "Inter", sans-serif;
+}
+
+.btn_primary:hover {
+  background: #000061;
+  border-color: #000061;
+  font-family: "Inter", sans-serif;
+}
+
+.fs_12 {
+  font-size: 12px;
+}
+
+.footer_link {
+  font-family: "Lato", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.footer_link a {
+  color: #000080;
+  text-decoration: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000080;
+  border-radius: 5px;
+  text-align: center;
+}

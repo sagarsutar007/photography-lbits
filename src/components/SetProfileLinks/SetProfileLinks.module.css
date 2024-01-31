@@ -1,0 +1,35 @@
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 10px;
+}
+
+.topBarLogo {
+  font-family: "Inter", sans-serif;
+  color: #000080;
+  font-weight: 800;
+}
+
+.backButton {
+  color: #000000;
+  font-size: 14px;
+}
+
+.profileIcons {
+  width: 80%;
+  background: #f8f8f8;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.profileIcon {
+  width: 100px;
+  background: #f8f8f8;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+p {
+  font-family: "Lato";
+}

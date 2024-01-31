@@ -1,0 +1,6 @@
+.form_control {
+  outline: none;
+  box-shadow: none;
+  border-color: #000080 !important;
+  font-family: "Lato", sans-serif;
+}

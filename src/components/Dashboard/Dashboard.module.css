@@ -1,0 +1,18 @@
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0px;
+}
+.topBarLogo {
+  font-family: "Inter", sans-serif;
+  color: #000080;
+  font-weight: 800;
+}
+
+.username {
+  font-family: "Inter", sans-serif;
+  color: #000080;
+  font-weight: 800;
+  font-size: 18px;
+}

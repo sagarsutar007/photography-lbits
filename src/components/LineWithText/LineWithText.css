@@ -1,0 +1,13 @@
+.line-with-text {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.line-with-text span {
+  background: #fff;
+  padding: 0 10px;
+  font-size: 12px;
+}
