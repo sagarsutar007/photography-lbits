@@ -58,7 +58,7 @@ const ShareProfile = () => {
         <div className="form-group mb-5">
           <input
             type="text"
-            value={loading ? "" : "vitl.one/" + userData.username || ""}
+            value={loading ? "" : "photography.me/" + userData.username || ""}
             className="form-control fs-12 text-center"
             readOnly
           />
@@ -70,7 +70,7 @@ const ShareProfile = () => {
             href={
               `whatsapp://send?text=` +
               encodeURIComponent(
-                `Hi, I am ${userData.name}. You can find me on Vitl App: vitl.one/${userData.username}`
+                `Hi, I am ${userData.name}. You can find me on Vitl App: photography.me/${userData.username}`
               )
             }
             target="_blank"
@@ -85,8 +85,8 @@ const ShareProfile = () => {
           </a>
           <a
             className="btn btn-link fs-12 text-dark"
-            href={`mailto:?subject=See%20me%20on%20Vitl.one&body=${encodeURIComponent(
-              `Hi, I am ${userData.name}. You can find me on Vitl App: vitl.one/${userData.username}`
+            href={`mailto:?subject=See%20me%20on%20photography.me&body=${encodeURIComponent(
+              `Hi, I am ${userData.name}. You can find me on Vitl App: photography.me/${userData.username}`
             )}`}
             target="_blank"
           >

@@ -60,7 +60,7 @@ const ProfileSetup = () => {
     <div className="container">
       <div className="row">
         <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-          <h1 className="logo-text">vitl.one</h1>
+          <h1 className="logo-text">photography.me</h1>
           <p className="mb-5 title-txt">
             Just few more details to get you started...
           </p>

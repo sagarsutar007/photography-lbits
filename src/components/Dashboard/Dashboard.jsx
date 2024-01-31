@@ -74,7 +74,7 @@ const Dashboard = () => {
           width="40px"
           alt=""
         />
-        <div className={style.topBarLogo}>vitl.one</div>
+        <div className={style.topBarLogo}>photography.me</div>
       </div>
       {logUser && <div className={style.username}>Hi, {logUser.name}</div>}
       <div className="banner my-3">

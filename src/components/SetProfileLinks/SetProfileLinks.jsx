@@ -37,7 +37,7 @@ const SetProfileLinks = () => {
         <NavLink to="/dashboard" className={style.backButton}>
           <Icon.ChevronDoubleLeft />
         </NavLink>
-        <span className={style.topBarLogo}>vitl.one</span>
+        <span className={style.topBarLogo}>photography.me</span>
       </div>
       <p className="text-dark text-center fs-12">Add Links to your profile</p>
 
@@ -172,7 +172,7 @@ const SetProfileLinks = () => {
         Submit
       </button>
 
-      <p className="footer-logo-text mt-5">vitl.one</p>
+      <p className="footer-logo-text mt-5">photography.me</p>
     </div>
   );
 };

@@ -44,7 +44,7 @@ const Phone = ({ type, onOtpReceived }) => {
 
   return (
     <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-      <h1 className="logo-text">vitl.one</h1>
+      <h1 className="logo-text">photography.me</h1>
       {type === "sign-in" && <p className="fs-5 mb-5 title-txt">Login</p>}
       {type === "sign-up" && <p className="fs-5 mb-5 title-txt">Sign Up</p>}
       <div className="form-group w-100">

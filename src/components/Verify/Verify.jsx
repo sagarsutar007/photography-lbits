@@ -55,7 +55,7 @@ const Verify = ({ userId }) => {
 
   return (
     <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-      <h1 className="logo-text">vitl.one</h1>
+      <h1 className="logo-text">photography.me</h1>
       <p className="mb-5 title-txt">Enter code to confirm it’s you</p>
       <div className="d-flex align-items-center gap-4 mb-3">
         {otp.map((digit, index) => (

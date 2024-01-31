@@ -1,2 +1,2 @@
-const BACKEND_URL = "https://vitl.one/test/be";
+const BACKEND_URL = "https://photography.me/api";
 export { BACKEND_URL };

@@ -17,7 +17,7 @@ const SetLink = () => {
         <NavLink to="/set-profile-links" className={style.backButton}>
           <Icon.ChevronDoubleLeft />
         </NavLink>
-        <span className={style.topBarLogo}>vitl.one</span>
+        <span className={style.topBarLogo}>photography.me</span>
       </div>
       {type === "phone" && <Phone />}
       {type === "email" && <Email />}

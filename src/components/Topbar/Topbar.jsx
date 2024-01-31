@@ -7,7 +7,7 @@ const Topbar = (props) => {
         <Icon.ChevronDoubleLeft />
       </NavLink>
       {props.pageTitle && <span className="page-title">{props.pageTitle}</span>}
-      <span className={"top-bar-logo"}>vitl.one</span>
+      <span className={"top-bar-logo"}>photography.me</span>
     </div>
   );
 };

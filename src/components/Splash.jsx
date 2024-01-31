@@ -15,7 +15,7 @@ const Splash = () => {
 
   return (
     <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-      <h1 className="logo-text">vitl.one</h1>
+      <h1 className="logo-text">photography.me</h1>
       <p className="subtitle-text">share profile simple!</p>
     </div>
   );
