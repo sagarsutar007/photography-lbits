@@ -1,6 +1,6 @@
 {
-  "name": "vitlfe",
-  "homepage": "https://photography.me",
+  "name": "chromacheer-frontend",
+  "homepage": "https://chromacheer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

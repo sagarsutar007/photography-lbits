@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { LOGO_URL } from "../utilities/constants";
 
 const Splash = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Splash = () => {
 
   return (
     <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-      <h1 className="logo-text">photography.me</h1>
+      <h1 className="logo-text"><img src={LOGO_URL} ></img></h1>
       <p className="subtitle-text">share profile simple!</p>
     </div>
   );

@@ -4,6 +4,7 @@ import Styles from "./Verify.module.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/UserSlice";
+import { LOGO_URL } from "../../utilities/constants";
 
 const Verify = ({ userId }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
@@ -55,7 +56,7 @@ const Verify = ({ userId }) => {
 
   return (
     <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-      <h1 className="logo-text">photography.me</h1>
+      <h1 className="logo-text"><img src={LOGO_URL}></img></h1>
       <p className="mb-5 title-txt">Enter code to confirm it’s you</p>
       <div className="d-flex align-items-center gap-4 mb-3">
         {otp.map((digit, index) => (

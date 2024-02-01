@@ -34,7 +34,7 @@ const ResetPin = () => {
         setError("New Pin and Confirm Pin should match");
       } else {
         axios
-          .post("http://localhost/photography.me-backend/reset-pin", {
+          .post("http://localhost/chroma-cheer-backend/reset-pin", {
             oldPin: oldPin,
             newPin: newPin,
             confPin: confPin,

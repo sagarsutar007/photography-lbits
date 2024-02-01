@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./Phone.module.css";
 import axios from "axios";
-import { BACKEND_URL } from "../../utilities/constants";
+import { BACKEND_URL, LOGO_URL } from "../../utilities/constants";
 
 const Phone = ({ type, onOtpReceived }) => {
   const [phone, setPhone] = useState("");
@@ -44,7 +44,7 @@ const Phone = ({ type, onOtpReceived }) => {
 
   return (
     <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-      <h1 className="logo-text">photography.me</h1>
+      <h1 className="logo-text"><img src={LOGO_URL}></img></h1>
       {type === "sign-in" && <p className="fs-5 mb-5 title-txt">Login</p>}
       {type === "sign-up" && <p className="fs-5 mb-5 title-txt">Sign Up</p>}
       <div className="form-group w-100">
