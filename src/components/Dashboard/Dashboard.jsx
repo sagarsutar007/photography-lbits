@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import style from "./Dashboard.module.css";
 import * as Icon from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
+import { FOOTER_URL } from "../../utilities/constants";
+
 const getUser = () => {
   let user = localStorage.getItem("user");
 
@@ -74,7 +76,7 @@ const Dashboard = () => {
           width="40px"
           alt=""
         />
-        <div className={style.topBarLogo}>photography.me</div>
+        <div className={style.topBarLogo}><img src={FOOTER_URL}></img></div>
       </div>
       {logUser && <div className={style.username}>Hi, {logUser.name}</div>}
       <div className="banner my-3">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./profilesetup.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { BACKEND_URL } from "../../utilities/constants";
+import { BACKEND_URL, FOOTER_URL } from "../../utilities/constants";
 
 const getUser = () => {
   let user = localStorage.getItem("user");
@@ -60,7 +60,7 @@ const ProfileSetup = () => {
     <div className="container">
       <div className="row">
         <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-          <h1 className="logo-text">photography.me</h1>
+          <h1 className="logo-text"><img src={FOOTER_URL}></img></h1>
           <p className="mb-5 title-txt">
             Just few more details to get you started...
           </p>

@@ -9,6 +9,7 @@ import Upi from "./Upi";
 import Resume from "./Resume";
 import Whatsapp from "./Whatsapp";
 import Telegram from "./Telegram";
+import { FOOTER_URL } from "../../utilities/constants";
 const SetLink = () => {
   let { type } = useParams();
   return (
@@ -17,7 +18,7 @@ const SetLink = () => {
         <NavLink to="/set-profile-links" className={style.backButton}>
           <Icon.ChevronDoubleLeft />
         </NavLink>
-        <span className={style.topBarLogo}>photography.me</span>
+        <span className={style.topBarLogo}><img src={FOOTER_URL}></img></span>
       </div>
       {type === "phone" && <Phone />}
       {type === "email" && <Email />}

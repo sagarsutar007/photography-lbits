@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../store";
+import { LOGO_URL } from "../utilities/constants";
 const getUser = () => {
   let user = localStorage.getItem("user");
 
@@ -45,7 +46,7 @@ const Splash = () => {
 
   return (
     <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-      <h1 className="logo-text mb-5">photography.me</h1>
+      <h1 className="logo-text mb-5"><img src={LOGO_URL}></img></h1>
       <p className="subtitle-text mt-5">Welcome onboard!</p>
       <p className="subtitle-text">Your Registration is complete</p>
     </div>

@@ -4,6 +4,7 @@ import * as Icon from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../store";
 import { useEffect, useState } from "react";
+import { FOOTER_URL } from "../../utilities/constants";
 
 const getUser = () => {
   let user = localStorage.getItem("user");
@@ -37,7 +38,7 @@ const SetProfileLinks = () => {
         <NavLink to="/dashboard" className={style.backButton}>
           <Icon.ChevronDoubleLeft />
         </NavLink>
-        <span className={style.topBarLogo}>photography.me</span>
+        <span className={style.topBarLogo}><img src={FOOTER_URL}></img></span>
       </div>
       <p className="text-dark text-center fs-12">Add Links to your profile</p>
 
@@ -172,7 +173,7 @@ const SetProfileLinks = () => {
         Submit
       </button>
 
-      <p className="footer-logo-text mt-5">photography.me</p>
+      <p className="footer-logo-text mt-5" ><img src={FOOTER_URL}></img></p>
     </div>
   );
 };
