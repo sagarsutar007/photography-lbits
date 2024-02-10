@@ -18,13 +18,23 @@ const ManageService = () => {
   const [logUser, setLogUser] = useState(getUser());
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState([]);// Changed from an array to a single file
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
+    // const files = Array.from(e.target.files);
+    // setImages(file);
     const files = Array.from(e.target.files);
-    setImages(files);
+
+    if (files.length > 1) {
+      setError("Please select only one image");
+      e.target.value = null;
+    } else {
+      setImages(files);
+      setError(""); // Clear error if only one file is selected
+    }
+
   };
 
   const handleSubmit = async () => {
@@ -32,11 +42,14 @@ const ManageService = () => {
       setError("Please enter title");
     } else if (description === "") {
       setError("Please enter description");
+    } else if (images.length !== 1) {
+      setError("Please select one image");
     } else {
       const formData = new FormData();
       formData.append("userid", logUser.id);
       formData.append("title", title);
       formData.append("description", description);
+      formData.append("services_img", images[0]); // Take only the first image
 
       // Append each file to the form data
       images.forEach((file, index) => {

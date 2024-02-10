@@ -11,7 +11,6 @@ import CredentialsSetup from "./components/ProfileSetup/CredentialsSetup";
 import SetProfileLinks from "./components/SetProfileLinks/SetProfileLinks";
 import Welcome from "./components/Welcome";
 import Dashboard from "./components/Dashboard/Dashboard";
-
 import "bootstrap/dist/css/bootstrap.css";
 import "./App.css";
 import SetLink from "./components/SetProfileLinks/SetLink";
@@ -19,13 +18,16 @@ import EditProfile from "./components/EditProfile/EditProfile";
 import ShareProfile from "./components/ShareProfile";
 import ResetPin from "./components/ResetPin";
 import Services from "./components/Services";
-import Abstracts from "./components/Abstracts";
+// import Abstracts from "./components/Abstracts";
 import Messages from "./components/Messages";
 import ManageService from "./components/ManageService";
-import ManageAbstract from "./components/ManageAbstract";
+// import ManageAbstract from "./components/ManageAbstract";
 import ViewProfile from "./components/Dashboard/ViewProfile";
 import SendMessage from "./components/SendMessage";
 import QrScanner from "./components/QrScanner";
+import Portfolio from "./components/Portfolio";
+import ManagePortfolio from "./components/ManagePortfolio";
+
 function App() {
   return (
     <Provider store={store}>
@@ -59,6 +61,7 @@ function App() {
                   path="/welcome"
                   element={<Protected Component={Welcome} />}
                 />
+            
                 <Route
                   path="/dashboard"
                   element={<Protected Component={Dashboard} />}
@@ -80,15 +83,20 @@ function App() {
                   path="/messages"
                   element={<Protected Component={Messages} />}
                 />
+                <Route path="/:username/portfolio" element={<Portfolio />} />
+                <Route
+                  path="/manage-portfolio"
+                  element={<Protected Component={ManagePortfolio} />}
+                />
                 <Route
                   path="/manage-service"
                   element={<Protected Component={ManageService} />}
                 />
-                <Route path="/:username/abstracts" element={<Abstracts />} />
+                {/* <Route path="/:username/abstracts" element={<Abstracts />} />
                 <Route
                   path="/manage-abstract"
                   element={<Protected Component={ManageAbstract} />}
-                />
+                /> */}
                 <Route
                   path="/view-profile"
                   element={<Protected Component={ViewProfile} />}

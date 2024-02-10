@@ -1,6 +1,7 @@
 import { useState } from "react";
-import Phone from "./Phone/Phone";
+import Phone from "./SignIn/SignIn";
 import Verify from "./Verify/Verify";
+import SignIn from "./SignIn/SignIn";
 
 function Access({ type }) {
   const [verificationData, setVerificationData] = useState({
@@ -18,7 +19,7 @@ function Access({ type }) {
   return (
     <div>
       {type === "sign-in" && (
-        <Phone type={type} onOtpReceived={handlePhoneVerification} />
+        <SignIn type={type} onOtpReceived={handlePhoneVerification} />
       )}
       {type === "sign-up" && (
         <Phone type={type} onOtpReceived={handlePhoneVerification} />

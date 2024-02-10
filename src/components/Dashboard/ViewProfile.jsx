@@ -4,6 +4,8 @@ import Topbar from "../Topbar/Topbar";
 import axios from "axios";
 import { BACKEND_URL } from "../../utilities/constants";
 import { useNavigate, useParams } from "react-router-dom";
+import Portfolio from "../Portfolio";
+
 const getUser = () => {
   let user = localStorage.getItem("user");
   if (user) user = JSON.parse(user);
@@ -13,6 +15,7 @@ const getUser = () => {
 
 const ViewProfile = () => {
   const [logUser, setLogUser] = useState(null);
+  const [highlightedIcon, setHighlightedIcon] = useState(null);
   const imagePath = process.env.PUBLIC_URL + "/assets/images/";
   const [profile, setProfile] = useState({});
   const navigate = useNavigate();
@@ -82,6 +85,24 @@ const ViewProfile = () => {
         break;
     }
   };
+
+  const handleIconHover = (type) => {
+    setHighlightedIcon(type);
+  };
+
+  const handleIconLeave = () => {
+    setHighlightedIcon(null);
+  };
+
+  const getIconStyles = (iconType) => {
+    const baseStyle = { width: "50%" };
+
+    if (highlightedIcon === iconType) {
+      return { ...baseStyle, border: "2px solid #ffcc00", borderRadius: "8px" };
+    }
+
+    return baseStyle;
+  };
   return (
     <div className="v-95">
       <Topbar prevPage={"/dashboard"} pageTitle={"View Profile"} />
@@ -102,7 +123,7 @@ const ViewProfile = () => {
       </div>
 
       <div className="text-center fw-bold">{profile.name}</div>
-      <div className="text-center fs-10">Medical Consultant</div>
+      <div className="text-center fs-10">Photography Consultant</div>
       <p className="mt-2 fs-12 text-center">{profile.description}</p>
 
       <div className="row mt-2">
@@ -110,11 +131,13 @@ const ViewProfile = () => {
           <div className="col-3 text-center mb-4">
             <img
               src={imagePath + "whatsapp.png"}
-              className="w-50"
+              style={getIconStyles("whatsapp")}
               alt="whatsapp"
               onClick={() => {
                 handleClick("whatsapp");
               }}
+              onMouseEnter={() => handleIconHover("whatsapp")}
+              onMouseLeave={handleIconLeave}
             />
           </div>
         )}
@@ -122,11 +145,13 @@ const ViewProfile = () => {
           <div className="col-3 text-center mb-4">
             <img
               src={imagePath + "viber.png"}
-              className="w-50"
+              style={getIconStyles("phone")}
               alt="viber"
               onClick={() => {
                 handleClick("phone");
               }}
+              onMouseEnter={() => handleIconHover("phone")}
+              onMouseLeave={handleIconLeave}
             />
           </div>
         )}
@@ -134,11 +159,13 @@ const ViewProfile = () => {
           <div className="col-3 text-center mb-4">
             <img
               src={imagePath + "gmail.png"}
-              className="w-50"
+              style={getIconStyles("gmail")}
               alt="viber"
               onClick={() => {
                 handleClick("email");
               }}
+              onMouseEnter={() => handleIconHover("gmail")}
+              onMouseLeave={handleIconLeave}
             />
           </div>
         )}
@@ -146,11 +173,13 @@ const ViewProfile = () => {
           <div className="col-3 text-center mb-4">
             <img
               src={imagePath + "maps.png"}
-              className="w-50"
+              style={getIconStyles("maps")}
               alt="viber"
               onClick={() => {
                 handleClick("maps");
               }}
+              onMouseEnter={() => handleIconHover("maps")}
+              onMouseLeave={handleIconLeave}
             />
           </div>
         )}
@@ -158,7 +187,7 @@ const ViewProfile = () => {
           <div className="col-3 text-center mb-4">
             <img
               src={imagePath + "youtube.png"}
-              className="w-50"
+              style={getIconStyles("youtube")}
               alt="viber"
               onClick={() => {
                 handleClick("youtube");
@@ -170,35 +199,41 @@ const ViewProfile = () => {
           <div className="col-3 text-center mb-4">
             <img
               src={imagePath + "linkedin.png"}
-              className="w-50"
+              style={getIconStyles("linkedin")}
               alt="viber"
               onClick={() => {
                 handleClick("linkedin");
               }}
+              onMouseEnter={() => handleIconHover("linkedin")}
+              onMouseLeave={handleIconLeave}
             />
           </div>
         )}
-        {profile.telegram && (
+        {/* {profile.telegram && (
           <div className="col-3 text-center mb-4">
             <img
               src={imagePath + "telegram.png"}
-              className="w-50"
+              style={getIconStyles("telegram")}
               alt="viber"
               onClick={() => {
                 handleClick("telegram");
               }}
+              onMouseEnter={() => handleIconHover("telegram")}
+              onMouseLeave={handleIconLeave}
             />
           </div>
-        )}
+        )} */}
         {profile.twitter && (
           <div className="col-3 text-center mb-4">
             <img
               src={imagePath + "twitter.png"}
-              className="w-50"
+              style={getIconStyles("twitter")}
               alt="viber"
               onClick={() => {
                 handleClick("twitter");
               }}
+              onMouseEnter={() => handleIconHover("twitter")}
+              onMouseLeave={handleIconLeave}
             />
           </div>
         )}
@@ -206,18 +241,20 @@ const ViewProfile = () => {
           <div className="col-3 text-center mb-4">
             <img
               src={imagePath + "website.png"}
-              className="w-50"
+              style={getIconStyles("website")}
               alt="viber"
               onClick={() => {
                 handleClick("website");
               }}
+              onMouseEnter={() => handleIconHover("website")}
+              onMouseLeave={handleIconLeave}
             />
           </div>
         )}
       </div>
       <div className="row mt-3">
         <div className="col-10 mx-auto">
-          {profile.services > 0 && (
+          {/* {profile.services > 0 && (
             <button
               className="btn btn-outline-primary rounded-pill w-100 fs-12 mb-3"
               onClick={(e) => {
@@ -226,9 +263,9 @@ const ViewProfile = () => {
             >
               Services
             </button>
-          )}
+          )} */}
 
-          {profile.abstracts > 0 && (
+          {/* {profile.abstracts > 0 && (
             <button
               className="btn btn-outline-primary rounded-pill w-100 fs-12 mb-3"
               onClick={(e) => {
@@ -237,15 +274,20 @@ const ViewProfile = () => {
             >
               Abstracts
             </button>
-          )}
-          <button
+          )} */}
+          {/* <button
             className="btn btn-outline-primary rounded-pill w-100 fs-12"
             onClick={(e) => {
               navigate("/" + profile.username + "/send-message/");
             }}
           >
             Send Message
-          </button>
+          </button> */}
+
+          <Portfolio/>
+          
+
+
         </div>
         {profile.calendly && (
           <div className="App mt-4 v-120">

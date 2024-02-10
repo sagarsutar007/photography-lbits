@@ -58,7 +58,7 @@ const ShareProfile = () => {
         <div className="form-group mb-5">
           <input
             type="text"
-            value={loading ? "" : "chromacheer/" + userData.username || ""}
+            value={loading ? "" : "chromagz/" + userData.username || ""}
             className="form-control fs-12 text-center"
             readOnly
           />
@@ -70,7 +70,7 @@ const ShareProfile = () => {
             href={
               `whatsapp://send?text=` +
               encodeURIComponent(
-                `Hi, I am ${userData.name}. You can find me on ChromaCheer App: chromacheer/${userData.username}`
+                `Hi, I am ${userData.name}. You can find me on Chromagz App: chromagz/${userData.username}`
               )
             }
             target="_blank"
@@ -85,8 +85,8 @@ const ShareProfile = () => {
           </a>
           <a
             className="btn btn-link fs-12 text-dark"
-            href={`mailto:?subject=See%20me%20on%20chromacheer&body=${encodeURIComponent(
-              `Hi, I am ${userData.name}. You can find me on CHROMACHEER App: chromacheer/${userData.username}`
+            href={`mailto:?subject=See%20me%20on%20chromagz&body=${encodeURIComponent(
+              `Hi, I am ${userData.name}. You can find me on CHROMAGZ App: chromagz/${userData.username}`
             )}`}
             target="_blank"
           >

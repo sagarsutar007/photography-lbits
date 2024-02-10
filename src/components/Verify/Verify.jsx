@@ -40,14 +40,19 @@ const Verify = ({ userId }) => {
       setIsLoading(true);
       let userCredentials = { enteredOtp, userId };
       dispatch(loginUser(userCredentials)).then((result) => {
+        console.log("Verification Result:", result);
+
         if (result.payload) {
           if (result.payload.pin === null) {
+            console.log("Navigating to setup-profile");
             navigate("/setup-profile");
           } else {
+            console.log("Navigating to dashboard");
             navigate("/dashboard");
           }
         } else {
-          setOtpError("Invalid OTP");
+          console.error("Invalid OTP or Unauthorized:", result);
+          setOtpError("Invalid OTP or Unauthorized");
           setIsLoading(false);
         }
       });
@@ -67,7 +72,7 @@ const Verify = ({ userId }) => {
             onChange={(e) => handleChange(e.target.value, index)}
             onKeyUp={(e) => handleBackspaceAndEnter(e, index)}
             ref={(reference) => (otpBoxReference.current[index] = reference)}
-            className={`p-3 rounded-md ${Styles.cell}`}
+            className={`p-3 rounded-md ${Styles.cell}` }
           />
         ))}
       </div>

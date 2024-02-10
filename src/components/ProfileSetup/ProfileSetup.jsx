@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./profilesetup.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { BACKEND_URL, FOOTER_URL } from "../../utilities/constants";
+import * as Icon from "react-bootstrap-icons";
+import { BACKEND_URL, LOGO_URL } from "../../utilities/constants";
 
 const getUser = () => {
   let user = localStorage.getItem("user");
@@ -22,20 +23,35 @@ const ProfileSetup = () => {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const [logUser, setLogUser] = useState(null);
+  const [currentStep, setCurrentStep] = useState(1); // Added state for current step
   const navigate = useNavigate();
 
   useEffect(() => {
     setLogUser(getUser());
   }, []);
+  const validateForm = () => {
+    if (name.trim() === "" || email.trim() === "" || state.trim() === "" || city.trim() === "") {
+      setError("Please fill out all fields.");
+      return false;
+    }
+
+    // You can add more specific validations for each field here if needed
+
+    setError("");
+    return true;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userid = logUser.id;
-    if (name === "" || email === "" || state === "" || city === "") {
-      setError("Please fill out all fields.");
+    if (!validateForm()) {
       return;
     }
-    setError("");
+    const userid = logUser.id;
+    // if (name === "" || email === "" || state === "" || city === "") {
+    //   setError("Please fill out all fields.");
+    //   return;
+    // }
+    // setError("");
 
     try {
       const response = await axios.post(BACKEND_URL + "/update-user", {
@@ -47,6 +63,7 @@ const ProfileSetup = () => {
       });
 
       if (response.data.status === "SUCCESS") {
+        setCurrentStep(currentStep + 1);
         navigate("/set-credentials");
       } else {
         setError("Failed to submit the form. Please try again.");
@@ -55,12 +72,18 @@ const ProfileSetup = () => {
       setError("An error occurred. Please try again later.", error);
     }
   };
+  const handleBack = () => {
+    navigate(-1); // Go back to the previous page
+  };
+
 
   return (
     <div className="container">
+      <div style={{display:'flex'}}><Icon.ChevronDoubleLeft  onClick={handleBack}/>
+      <div style={{marginLeft:'200px'}}>Step {currentStep}/3</div></div>
       <div className="row">
-        <div className="v-100 d-flex align-items-center flex-column justify-content-center">
-          <h1 className="logo-text"><img src={FOOTER_URL}></img></h1>
+        <div className="v-100 d-flex align-items-center flex-column justify-content-center" >
+          <h1 className="logo-text"><img src={LOGO_URL}></img></h1>
           <p className="mb-5 title-txt">
             Just few more details to get you started...
           </p>

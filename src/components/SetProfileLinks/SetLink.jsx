@@ -37,16 +37,18 @@ const SetLink = () => {
       {type === "linkedin" && (
         <Url image={"linkedin.png"} label={"LinkedIn"} field={"linkedin"} />
       )}
-      {type === "telegram" && <Telegram />}
+      {/* {type === "telegram" && <Telegram />}
       {type === "twitter" && (
         <Url image={"twitter.png"} label={"Twitter"} field={"twitter"} />
-      )}
+      )} */}
       {type === "website" && (
         <Url image={"website.png"} label={"Website"} field={"website"} />
       )}
-      {type === "upi" && <Upi />}
+      {type === "upi" && (
+         <Url image={"upi.png"} label={"Upi"} field={"upi"} />
+      )}
       {type === "smartphone" && (
-        <Url image={"smartphone.png"} label={"Smartphone"} />
+        <Url image={"smartphone.png"} label={"Smartphone"} field={"smartphone"} placeholder={"Enter Mobile Number"}/>
       )}
       <div className="my-5"></div>
     </div>

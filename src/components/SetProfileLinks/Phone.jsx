@@ -12,19 +12,31 @@ const getUser = () => {
 
 const Phone = () => {
   const [logUser, setLogUser] = useState(getUser());
-  const [phone, setPhone] = useState(null);
+  const [phone, setPhone] = useState(logUser?.phone ?? "");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const imagePath = process.env.PUBLIC_URL + "/assets/images/";
 
+
+  const isPhoneNumberValid = (phoneNumber) => {
+    // Check if the phone number consists of only digits
+    const isNumeric = /^\d+$/.test(phoneNumber);
+
+    // Check if it's a valid Indian mobile number with or without the "+91" prefix
+    const isValidIndianNumber =
+      /^\+?91[6789]\d{9}$/.test(phoneNumber) || /^\d{10}$/.test(phoneNumber);
+
+    return isNumeric && isValidIndianNumber;
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userid = logUser.id;
-    if (phone === "") {
-      setError("Please fill out the field");
+    if (!isPhoneNumberValid(phone)) {
+      setError("Please enter a valid Indian mobile number.");
       return;
     }
+
     setError("");
+    const userid = logUser.id;
     try {
       const response = await axios.post(BACKEND_URL + "/update-user", {
         phone,
@@ -42,6 +54,7 @@ const Phone = () => {
   };
 
   return (
+    
     <div className="text-center mt-5">
       <img
         src={imagePath + "viber.png"}
@@ -52,7 +65,7 @@ const Phone = () => {
       <div className="row col-8 mx-auto">
         <div className="form-group px-0 mb-3">
           <input
-            type="text"
+            type="numbers"
             className="form-control"
             onChange={(e) => setPhone(e.target.value)}
             placeholder="+91 | 99388XXXXX"

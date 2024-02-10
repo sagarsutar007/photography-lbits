@@ -77,7 +77,7 @@ const SendMessage = () => {
           </label>
           <textarea
             id="phone"
-            className="form-control bg-light-grey border-0 fs-12"
+            className="form-control bg-light-grey border-0 fs-12" style={{height:'10px'}}
             value={logUser.phone}
           ></textarea>
         </div>
@@ -87,7 +87,7 @@ const SendMessage = () => {
           </label>
           <textarea
             id="msg"
-            className="form-control bg-light-grey border-0 fs-12"
+            className="form-control bg-light-grey border-0 fs-12" style={{height:'70px'}}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           ></textarea>

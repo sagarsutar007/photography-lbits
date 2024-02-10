@@ -54,7 +54,7 @@ const Email = () => {
       <div className="row col-8 mx-auto">
         <div className="form-group px-0 mb-3">
           <input
-            type="text"
+            type="email"
             className="form-control"
             onChange={(e) => setEmail(e.target.value)}
             defaultValue={logUser.email}

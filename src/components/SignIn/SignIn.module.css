@@ -1,7 +1,7 @@
 .input_group_text {
   font-family: "Lato", sans-serif;
   background-color: #ffffff !important;
-  border: 1px solid #000080 !important;
+  border: 1px solid var(--primary-color) !important;
   border-right: none !important;
 }
 
@@ -9,13 +9,13 @@
   border-left: none !important;
   outline: none;
   box-shadow: none;
-  border-color: #000080 !important;
+  border-color: var(--primary-color) !important;
   font-family: "Lato", sans-serif;
 }
 
 .form_control:focus {
   box-shadow: none;
-  border-color: #000080 !important;
+  border-color: var(--primary-color) !important;
 }
 
 input::-webkit-outer-spin-button,

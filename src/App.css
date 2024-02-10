@@ -3,13 +3,13 @@
   --primary-color: #678983;
 
 }
-.logo-text {
+/* .logo-text {
   font-family: "Inter", sans-serif;
   text-align: center;
   color: #000080;
   font-weight: 800;
   margin-bottom: 2px;
-}
+} */
 
 .subtitle-text {
   font-family: "Montserrat", sans-serif;
@@ -18,7 +18,7 @@
 }
 
 .footer-logo-text {
-  color: #000080;
+  /* color: #000080; */
   font-size: 12px;
   font-weight: 800;
   position: fixed;
@@ -29,28 +29,28 @@
 }
 
 .btn-primary {
-  background:var(--primary-color);
+  background: var(--primary-color) !important;
   border-color: var(--primary-color);
   font-family: "Inter", sans-serif;
 }
 
 .btn-primary:hover {
-  background: #000061;
-  border-color: #000061;
+  background:var(--primary-color)!important; 
+  border-color:var(--primary-color)!important;
   font-family: "Inter", sans-serif;
 }
 
 .btn-outline-primary {
-  border-color: #000080;
-  color: #000080;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
   font-family: "Inter", sans-serif;
-  border: 2px solid #000080;
+  border: 2px solid var(--primary-color);
 }
 
 .btn-outline-primary:hover {
-  background: #000080;
+  background: var(--primary-color);
   color: white;
-  border-color: #000080;
+  border-color: var(--primary-color);
 }
 
 .title-txt {
@@ -65,7 +65,7 @@
 
 .form-control:focus {
   box-shadow: none;
-  border-color: #000080;
+  border-color: var(--primary-color);
 }
 
 .footer-link {
@@ -75,7 +75,7 @@
 }
 
 .footer-link a {
-  color: #000080;
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -122,15 +122,15 @@
   margin: 20px 10px;
 }
 
-.top-bar-logo {
+/* .top-bar-logo {
   font-family: "Inter", sans-serif;
   color: #000080;
   font-weight: 800;
   font-size: 15px;
-}
+} */
 
 .back-button {
-  color: #000000;
+  color: var(--primary-color);
   font-size: 14px;
 }
 

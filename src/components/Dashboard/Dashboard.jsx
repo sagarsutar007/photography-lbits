@@ -50,8 +50,8 @@ const Dashboard = () => {
       navigate("/manage-service");
     }
 
-    if (type === "manage-abstract") {
-      navigate("/manage-abstract");
+    if (type === "manage-portfolio") {
+      navigate("/manage-portfolio");
     }
 
     if (type === "view-profile") {
@@ -64,8 +64,10 @@ const Dashboard = () => {
   };
 
   return (
+    
     <div style={{ minHeight: "97vh" }}>
-      <div className={style.topBar}>
+      <div className={style.topBarLogo} style={{display:'flex'}}><img src={FOOTER_URL}></img>
+      <div className={style.topBar} style={{marginLeft:'250px'}}>
         <img
           src={
             logUser && logUser.profile_img
@@ -76,13 +78,13 @@ const Dashboard = () => {
           width="40px"
           alt=""
         />
-        <div className={style.topBarLogo}><img src={FOOTER_URL}></img></div>
+        </div>
       </div>
       {logUser && <div className={style.username}>Hi, {logUser.name}</div>}
       <div className="banner my-3">
-        <img src={imagePath + "banner.png"} className="img-fluid" alt="" />
+         <img src={imagePath + "banner.jpg"} className="img-fluid" style={{borderRadius:'10px',height:'170px',width:'100%' , alignSelf: 'center'}}  alt="" />{/* */}
       </div>
-      <div className="row bg-lightgrey">
+      <div className="row bg-lightgrey d-flex align-items-center justify-content-center">
         <div
           className="col-3 d-flex align-items-center justify-content-center flex-column p-3"
           onClick={() => {
@@ -101,7 +103,20 @@ const Dashboard = () => {
           <Icon.PersonGear size={25} />
           <p className="fs-10 mb-0 mt-1 text-center">Edit Profile</p>
         </div>
-        <div
+          <div
+          className="col-3 d-flex align-items-center justify-content-center flex-column p-3"
+          onClick={() => {
+            handleClick("manage-portfolio");
+          }}
+        >
+          <Icon.Clipboard size={25} />
+          <p className="fs-10 mb-0 mt-1 text-center">
+            Manage
+            <br />
+            Portfolio
+          </p>
+        </div>
+        {/* <div
           className="col-3 d-flex align-items-center justify-content-center flex-column p-3"
           onClick={() => {
             handleClick("messages");
@@ -120,9 +135,9 @@ const Dashboard = () => {
           <p className="fs-10 mb-0 mt-1 text-center">
             Manage <br /> Services
           </p>
-        </div>
+        </div> */}
       </div>
-      <div className="row bg-white">
+      <div className="row bg-white d-flex align-items-center justify-content-center">
         <div
           className="col-3 d-flex align-items-center justify-content-center flex-column p-3"
           onClick={() => {
@@ -138,22 +153,22 @@ const Dashboard = () => {
             handleClick("share-profile");
           }}
         >
-          <Icon.QrCode size={25} />
+          <Icon.ShareFill size={25} />
           <p className="fs-10 mb-0 mt-1 text-center">Share Profile</p>
         </div>
-        <div
+        {/* <div
           className="col-3 d-flex align-items-center justify-content-center flex-column p-3"
           onClick={() => {
-            handleClick("manage-abstract");
+            handleClick("manage-portfolio");
           }}
         >
           <Icon.Clipboard size={25} />
           <p className="fs-10 mb-0 mt-1 text-center">
             Manage
             <br />
-            Abstract
+            Portfolio
           </p>
-        </div>
+        </div> */}
         <div
           className="col-3 d-flex align-items-center justify-content-center flex-column p-3"
           onClick={() => {
