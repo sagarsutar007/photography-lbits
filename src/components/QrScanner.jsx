@@ -27,7 +27,7 @@ const QrScanner = () => {
         className="text-center fs-12 fw-bold"
         style={{ fontFamily: "Inter" }}
       >
-        Scan a Chroma Cheer QR
+        Scan a Chromagz QR
       </div>
       <div>
         {showQR ? (

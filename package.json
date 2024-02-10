@@ -1,6 +1,6 @@
 {
   "name": "chromacheer-frontend",
-  "homepage": "https://chromacheer",
+  "homepage": "https://chromaagz",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,11 +9,14 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.2",
-    "bootstrap": "^5.3.2",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-bootstrap-icons": "^1.10.3",
     "react-calendly": "^4.3.0",
     "react-dom": "^18.2.0",
+    "react-icon": "^1.0.0",
+    "react-icons": "^5.0.1",
+    "react-modal": "^3.16.1",
     "react-qr-scanner": "^1.0.0-alpha.11",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.0",

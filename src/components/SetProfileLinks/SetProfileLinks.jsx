@@ -4,7 +4,7 @@ import * as Icon from "react-bootstrap-icons";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../../store";
 import { useEffect, useState } from "react";
-import { FOOTER_URL } from "../../utilities/constants";
+import {  LOGO_URL } from "../../utilities/constants";
 
 const getUser = () => {
   let user = localStorage.getItem("user");
@@ -17,6 +17,7 @@ const SetProfileLinks = () => {
   const imagePath = process.env.PUBLIC_URL + "/assets/images/";
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [currentStep, setCurrentStep] = useState(3);
   const [logUser, setLogUser] = useState(null);
   useEffect(() => {
     const userFromStorage = getUser();
@@ -30,16 +31,24 @@ const SetProfileLinks = () => {
   };
 
   const handleSubmit = () => {
-    navigate(`/welcome`);
+    navigate(logUser ? "/dashboard" : "/welcome");
+  };
+  const handleBack = () => {
+    navigate(-1); // Go back to the previous page
   };
   return (
-    <div>
-      <div className={style.topBar}>
+    <div className="container">
+      {/* <div className={style.topBar}>
         <NavLink to="/dashboard" className={style.backButton}>
           <Icon.ChevronDoubleLeft />
         </NavLink>
-        <span className={style.topBarLogo}><img src={FOOTER_URL}></img></span>
-      </div>
+        <span className={style.topBarLogo}><img src={LOGO_URL}></img></span>
+      </div> */}
+      <div style={{display:'flex'}}><Icon.ChevronDoubleLeft  onClick={handleBack}/>
+      <div style={{marginLeft:'200px'}}>Step {currentStep}/3</div></div>
+      <div className="v-100 d-flex align-items-center flex-column justify-content-center" >
+          <h1 className="logo-text"><img src={LOGO_URL}></img></h1>
+          
       <p className="text-dark text-center fs-12">Add Links to your profile</p>
 
       <div className="row">
@@ -124,14 +133,14 @@ const SetProfileLinks = () => {
             onClick={() => handleImageClick("linkedin")}
           />
         </div>
-        <div className="col-4 mb-5 text-center">
+        {/* <div className="col-4 mb-5 text-center">
           <img
             src={imagePath + "telegram.png"}
             className={style.profileIcons}
             alt="telegram"
             onClick={() => handleImageClick("telegram")}
           />
-        </div>
+        </div> */}
         <div className="col-4 mb-5 text-center">
           <img
             src={imagePath + "twitter.png"}
@@ -142,7 +151,7 @@ const SetProfileLinks = () => {
         </div>
         <div className="col-4 mb-5 text-center">
           <img
-            src={imagePath + "world-wide-web.png"}
+            src={imagePath + "website.png"}
             className={style.profileIcons}
             alt="world wide web"
             onClick={() => handleImageClick("website")}
@@ -172,8 +181,9 @@ const SetProfileLinks = () => {
       <button className="btn btn-primary w-100 mb-5" onClick={handleSubmit}>
         Submit
       </button>
-
-      <p className="footer-logo-text mt-5" ><img src={FOOTER_URL}></img></p>
+      </div>
+      
+      {/* <p className="footer-logo-text mt-5" ><img src={FOOTER_URL}></img></p> */}
     </div>
   );
 };

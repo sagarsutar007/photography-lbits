@@ -21,8 +21,15 @@ const ResetPin = () => {
   const [confPin, setConfPin] = useState(""); // Add state for confPin
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const isNumeric = (value) => /^\d+$/.test(value);
 
   const handleSubmit = () => {
+    if (!isNumeric(oldPin) || !isNumeric(newPin) || !isNumeric(confPin)) {
+      setError("Old Pin, New Pin, and Confirm Pin should contain only numbers.");
+      return;
+    }
+  // const handleSubmit = () => {
+  //   console.log(newPin);
     if (oldPin === "") {
       setError("Please enter old pin");
     } else if (newPin === "") {
@@ -32,20 +39,23 @@ const ResetPin = () => {
     } else {
       if (newPin !== confPin) {
         setError("New Pin and Confirm Pin should match");
-      } else {
+      }else {
         axios
-          .post("http://localhost/chroma-cheer-backend/reset-pin", {
+          .post(BACKEND_URL+"reset-pin", {
             oldPin: oldPin,
             newPin: newPin,
             confPin: confPin,
             userid: logUser.id,
           })
+          
           .then((response) => {
             const data = response.data;
             if (data.status === "SUCCESS") {
               navigate("/dashboard");
-            } else {
-              setError("Something went wrong!");
+            }
+            
+            else {
+              setError("Please Enter Valid Old Pin!");
             }
           })
           .catch((error) => {

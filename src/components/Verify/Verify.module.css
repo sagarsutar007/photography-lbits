@@ -11,7 +11,7 @@
 .input_group_text {
   font-family: "Lato", sans-serif;
   background-color: #ffffff;
-  border-color: #000080;
+  border-color: var(--primary-color);
   border-right: none !important;
 }
 
@@ -19,24 +19,24 @@
   border-left: none !important;
   outline: none;
   box-shadow: none;
-  border-color: #000080;
+  border-color: var(--primary-color);
   font-family: "Lato", sans-serif;
 }
 
 .form_control:focus {
   box-shadow: none;
-  border-color: #000080;
+  border-color: var(--primary-color);
 }
 
 .btn_primary {
-  background: #000080;
-  border-color: #000080;
+  background: var(--primary-color)!important;
+  border-color: var(--primary-color)!important;
   font-family: "Inter", sans-serif;
 }
 
 .btn_primary:hover {
-  background: #000061;
-  border-color: #000061;
+  background: var(--primary-color)!important;
+  border-color: var(--primary-color)!important;
   font-family: "Inter", sans-serif;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .footer_link a {
-  color: #000080;
+  color: var(--primary-color)!important;;
   text-decoration: none;
 }
 
@@ -68,7 +68,7 @@ input[type="number"] {
 .cell {
   width: 50px;
   height: 50px;
-  border: 1px solid #000080;
+  border: 1px solid var(--primary-color);
   border-radius: 5px;
   text-align: center;
 }

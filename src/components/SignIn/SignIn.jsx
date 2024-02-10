@@ -1,11 +1,12 @@
 import { useState } from "react";
 // import LineWithText from "../LineWithText/LineWithText";
 import { Link, useNavigate } from "react-router-dom";
-import style from "./Phone.module.css";
+import style from "./SignIn.module.css";
 import axios from "axios";
 import { BACKEND_URL, LOGO_URL } from "../../utilities/constants";
+// import SignInWithGoogle from "../SignInWithGoogle/SignInWithGoogle"
 
-const Phone = ({ type, onOtpReceived }) => {
+const SignIn = ({ type, onOtpReceived }) => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -20,20 +21,49 @@ const Phone = ({ type, onOtpReceived }) => {
       } else {
         setIsLoading(true);
         axios
-          .post(BACKEND_URL + "/search-phone", {
+          .post(BACKEND_URL + (type ==="sign-up"? "search-phone":"user-existance"), {
             phone: phone,
           })
           .then((response) => {
             const data = response.data;
-            if (data.status === "SUCCESS") {
+            console.log(response.data);
+            console.log("Server Response:", response); // Log the server response
+            console.log("Data:", data)
+            if (type === "sign-in" && data.status === "SUCCESS" && data.message === "Phone number not found!" ) {
+              
+              // console.log("User not found. Please register first.");
+              // window.alert("User not found. Please register first.");
+              setError("User not found. Please register first.");
+             
+              // setTimeout(() => {
+              //   navigate("/sign-up");
+              // }, 500);
+
+            }else if(type === "sign-up"  && data.user_code === 'EXISTING')
+            {
+              console.log("User already exisit. Please go to login page.");
+              window.alert("User already exisit. Please go to login page.");
+             
+              // setTimeout(() => {
+              //   navigate("/sign-in");
+              // }, 500);
+            }
+            else if (data.status === "SUCCESS") {
+              console.log("Navigating to Verify:");
               onOtpReceived(data.user_code, data.user_id);
+              // setError("Something went wrong!");
+              // window.alert("User not found. Please register first.");
+
               navigate("/verify");
+
             } else {
+              console.error("Unexpected server response:", data);
               setError("Something went wrong!");
             }
           })
           .catch((error) => {
             console.error("Error sending data:", error);
+            setError("Something went wrong!");
           })
           .finally(() => {
             setIsLoading(false);
@@ -69,24 +99,22 @@ const Phone = ({ type, onOtpReceived }) => {
       </div>
       {error && <p className={`text-danger ${style.fs_12}`}>{error}</p>}
       <button
-        className={`btn btn-primary w-100 ${style.btn_primary}`}
+        className={`btn btn-primary w-100`}
         onClick={handleSubmit}
         disabled={isLoading}
       >
         {isLoading ? "Processing..." : "Continue"}
       </button>
-      {/* <LineWithText text="or continue with" /> */}
-      {/* <button className={`btn btn-outline-secondary w-100 ${style.fs_12}`}>
-        Sign In with Google
-      </button> */}
+      
 
-      {type === "sign-in" && (
+
+      {type === "sign-up" && (
         <p className={`mt-5 ${style.footer_link}`}>
           Already have an account? <Link to="/sign-in">Log In</Link>
         </p>
       )}
 
-      {type === "login" && (
+      {type === "sign-in" && (
         <p className={`mt-5 ${style.footer_link}`}>
           Don’t have an account? <Link to="/sign-up">Sign Up</Link>
         </p>
@@ -95,4 +123,4 @@ const Phone = ({ type, onOtpReceived }) => {
   );
 };
 
-export default Phone;
+export default SignIn;

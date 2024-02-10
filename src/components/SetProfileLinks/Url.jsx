@@ -10,7 +10,7 @@ const getUser = () => {
   return user;
 };
 
-const Url = ({ field, image, label }) => {
+const Url = ({ field, image, label,placeholder }) => {
   const [logUser, setLogUser] = useState(getUser());
   const [url, setUrl] = useState(logUser ? logUser[field] : null);
   const [error, setError] = useState("");
@@ -72,7 +72,7 @@ const Url = ({ field, image, label }) => {
             className="form-control"
             onChange={(e) => setUrl(e.target.value)}
             defaultValue={url}
-            placeholder="Enter URL"
+            placeholder={placeholder??"Enter URL"}
           />
         </div>
         {error && <p className="text-danger text-center fs-12">{error}</p>}

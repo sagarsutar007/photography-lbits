@@ -4,15 +4,15 @@
   align-items: center;
   margin: 20px 0px;
 }
-.topBarLogo {
+/* .topBarLogo {
   font-family: "Inter", sans-serif;
   color: #000080;
   font-weight: 800;
-}
+} */
 
 .username {
   font-family: "Inter", sans-serif;
-  color: #000080;
+  color: var(--primary-color);
   font-weight: 800;
   font-size: 18px;
 }
