@@ -19,7 +19,14 @@ const SetProfileLinks = () => {
   const dispatch = useDispatch();
   const [currentStep, setCurrentStep] = useState(3);
   const [logUser, setLogUser] = useState(null);
+  const [isedit,setIsEdit]=useState(true);
   useEffect(() => {
+    const searchParams = new URLSearchParams(document.location.search)
+   
+    console.log(searchParams.get('viewType'));
+    if (searchParams.get('viewType') === "edit"){
+      setIsEdit(false)
+    }
     const userFromStorage = getUser();
     setLogUser(userFromStorage);
     const userId = { userid: userFromStorage.id };
@@ -34,20 +41,15 @@ const SetProfileLinks = () => {
     navigate(logUser ? "/dashboard" : "/welcome");
   };
   const handleBack = () => {
-    navigate(-1); // Go back to the previous page
+    navigate(-1); 
   };
   return (
     <div className="container">
-      {/* <div className={style.topBar}>
-        <NavLink to="/dashboard" className={style.backButton}>
-          <Icon.ChevronDoubleLeft />
-        </NavLink>
-        <span className={style.topBarLogo}><img src={LOGO_URL}></img></span>
-      </div> */}
+     
       <div style={{display:'flex'}}><Icon.ChevronDoubleLeft  onClick={handleBack}/>
-      <div style={{marginLeft:'200px'}}>Step {currentStep}/3</div></div>
+      {isedit && <div style={{marginLeft:'200px'}}>Step {currentStep}/3</div>}</div>
       <div className="v-100 d-flex align-items-center flex-column justify-content-center" >
-          <h1 className="logo-text"><img src={LOGO_URL}></img></h1>
+          <h1 className="logo-text" style={{padding:'3px'}}><img src={LOGO_URL}></img></h1>
           
       <p className="text-dark text-center fs-12">Add Links to your profile</p>
 
@@ -87,25 +89,25 @@ const SetProfileLinks = () => {
             onClick={() => handleImageClick("maps")}
           />
         </div>
-        <div className="col-4 mb-5 text-center">
+        {/* <div className="col-4 mb-5 text-center">
           <img
             src={imagePath + "calendly.png"}
             className={style.profileIcons}
             alt="maps"
             onClick={() => handleImageClick("calendly")}
           />
-        </div>
-        <div className="col-12 ps-4">
+        </div> */}
+        {/* <div className="col-12 ps-4">
           <p className="text-dark ml-2">Upload CV</p>
-        </div>
-        <div className="col-4 mb-5 text-center">
+        </div> */}
+        {/* <div className="col-4 mb-5 text-center">
           <img
             src={imagePath + "cv.png"}
             className={style.profileIcons}
             alt="CV"
             onClick={() => handleImageClick("resume")}
           />
-        </div>
+        </div> */}
         <div className="col-12 ps-4">
           <p className="text-dark ml-2">Custom</p>
         </div>
@@ -157,14 +159,14 @@ const SetProfileLinks = () => {
             onClick={() => handleImageClick("website")}
           />
         </div>
-        <div className="col-4 mb-5 text-center">
+        {/* <div className="col-4 mb-5 text-center">
           <img
             src={imagePath + "smartphone.png"}
             className={style.profileIcons}
             alt="smartphone"
             onClick={() => handleImageClick("smartphone")}
           />
-        </div>
+        </div> */}
         <div className="col-12 ps-4">
           <p className="text-dark ml-2">Payment</p>
         </div>

@@ -1,16 +1,28 @@
 import { useState } from "react";
-// import LineWithText from "../LineWithText/LineWithText";
+
 import { Link, useNavigate } from "react-router-dom";
 import style from "./SignIn.module.css";
 import axios from "axios";
 import { BACKEND_URL, LOGO_URL } from "../../utilities/constants";
-// import SignInWithGoogle from "../SignInWithGoogle/SignInWithGoogle"
+
 
 const SignIn = ({ type, onOtpReceived }) => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const LoginPage = () => {
+    const navigate = useNavigate();
+   
+  const handleForgotPin = () => {
+    navigate(`/forgot-pin?phone=${phone}`);
+  };
+
+  return (
+  
+    <button onClick={handleForgotPin}>Forgot Pin</button>
+  );
+  };
 
   const handleSubmit = () => {
     if (phone === "") {
@@ -27,34 +39,32 @@ const SignIn = ({ type, onOtpReceived }) => {
           .then((response) => {
             const data = response.data;
             console.log(response.data);
-            console.log("Server Response:", response); // Log the server response
+            console.log("Server Response:", response); 
             console.log("Data:", data)
             if (type === "sign-in" && data.status === "SUCCESS" && data.message === "Phone number not found!" ) {
               
-              // console.log("User not found. Please register first.");
-              // window.alert("User not found. Please register first.");
+        
               setError("User not found. Please register first.");
              
-              // setTimeout(() => {
-              //   navigate("/sign-up");
-              // }, 500);
 
             }else if(type === "sign-up"  && data.user_code === 'EXISTING')
             {
               console.log("User already exisit. Please go to login page.");
               window.alert("User already exisit. Please go to login page.");
-             
-              // setTimeout(() => {
-              //   navigate("/sign-in");
-              // }, 500);
+         
             }
+            // else if (data.status === "SUCCESS") {
+            //   console.log("Navigating to Verify:");
+            //   onOtpReceived(data.user_code, data.user_id);
+           
+
+            //   navigate("/verify?viewType=signin : sign up");
+            
             else if (data.status === "SUCCESS") {
               console.log("Navigating to Verify:");
+              const viewType = type === "sign-in" ? "signin" : type === "sign-up" ? "signup" : "";
               onOtpReceived(data.user_code, data.user_id);
-              // setError("Something went wrong!");
-              // window.alert("User not found. Please register first.");
-
-              navigate("/verify");
+              navigate(`/verify?viewType=${viewType}`);            
 
             } else {
               console.error("Unexpected server response:", data);
@@ -90,9 +100,15 @@ const SignIn = ({ type, onOtpReceived }) => {
             id="phone"
             className={`form-control ${style.form_control}`}
             autoComplete="off"
+            maxLength={10} // Add maxLength attribute
+            value={phone} 
             onChange={(e) => {
-              setPhone(e.target.value);
+              const inputValue = e.target.value;
+              if (/^\d{0,10}$/.test(inputValue)) {
+                  setPhone(inputValue);
+              // setPhone(e.target.value);
               setError("");
+              }
             }}
           />
         </div>

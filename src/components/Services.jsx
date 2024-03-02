@@ -58,12 +58,6 @@ const Services = (props) => {
           </thead>
           <tbody>
         {services.map((service) => (
-          // <div key={service.id} className="row mb-3 border-bottom">
-          //   <div className="col-8">
-          //     <strong>{service.title}</strong>
-          //     <p className="fs-12">{service.description}</p>
-          //   </div>
-          //   <div className="col-4">
           <tr key={service.id}>
           <td>{service.title}</td>
           <td>{service.description}</td>
@@ -77,11 +71,7 @@ const Services = (props) => {
                   onClick={() => openModal(BACKEND_URL + "/assets/images/" + image.file_name)}
                   alt=""
                 />
-      //         ))}
-      //       </div>
-      //     </div>
-      //   ))}
-      // </div>
+      
       ))}
                 </td>
               </tr>

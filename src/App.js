@@ -18,16 +18,22 @@ import EditProfile from "./components/EditProfile/EditProfile";
 import ShareProfile from "./components/ShareProfile";
 import ResetPin from "./components/ResetPin";
 import Services from "./components/Services";
-// import Abstracts from "./components/Abstracts";
+
 import Messages from "./components/Messages";
 import ManageService from "./components/ManageService";
-// import ManageAbstract from "./components/ManageAbstract";
+
 import ViewProfile from "./components/Dashboard/ViewProfile";
 import SendMessage from "./components/SendMessage";
 import QrScanner from "./components/QrScanner";
 import Portfolio from "./components/Portfolio";
 import ManagePortfolio from "./components/ManagePortfolio";
+import ForgotPin from "./components/ForgotPin";
+import CreatePortfolio from "./components/CreatePortfolio";
+import EditProtfolio from "./components/EditProtfolio";
 
+import ShareEvent from "./components/CustomerEvent/ShareEvent";
+import ShareCustomerEvent from "./components/CustomerEvent/ShareCustomerEvent";
+import ManageCustomerEvent from "./components/CustomerEvent/ManageCustomerEvent";
 function App() {
   return (
     <Provider store={store}>
@@ -42,8 +48,25 @@ function App() {
                 <Route path="/sign-up" element={<Access type="sign-up" />} />
                 <Route path="/verify" element={<Access type="verify" />} />
                 <Route
+                  path="/share-customer-event"
+                  element={<ShareCustomerEvent />}
+                />
+
+                <Route
+                  path="/manage-customer-event"
+                  element={<ManageCustomerEvent />}
+                />
+                <Route path="/share-event" 
+                element={<ShareEvent />} 
+                />
+                <Route
                   path="/setup-profile"
                   element={<Protected Component={ProfileSetup} />}
+                />
+
+                 <Route
+                  path="/forgot-pin"
+                  element={<Protected Component={ForgotPin} />}
                 />
                 <Route
                   path="/set-credentials"
@@ -84,6 +107,14 @@ function App() {
                   element={<Protected Component={Messages} />}
                 />
                 <Route path="/:username/portfolio" element={<Portfolio />} />
+                <Route
+                  path="/manage-portfolio/create-portfolio"
+                  element={<Protected Component={CreatePortfolio} />}
+                />
+                 <Route
+                  path="/manage-portfolio/edit-portfolio"
+                  element={<Protected Component={EditProtfolio} />}
+                />
                 <Route
                   path="/manage-portfolio"
                   element={<Protected Component={ManagePortfolio} />}

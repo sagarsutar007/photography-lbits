@@ -15,7 +15,7 @@ const getUser = () => {
 };
 const ShareProfile = () => {
   const imagePath = process.env.PUBLIC_URL + "/assets/images/";
-  // eslint-disable-next-line
+  
   const [logUser, setLogUser] = useState(null);
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -40,6 +40,12 @@ const ShareProfile = () => {
 
     fetchData();
   }, []);
+  const copyToClipboard = () => {
+    const copyText = document.getElementById('profileLink');
+    copyText.select();
+    document.execCommand('copy');
+  };
+
 
   return (
     <div className="v-95">
@@ -55,49 +61,79 @@ const ShareProfile = () => {
         </div>
       </div>
       <div className="col-10 mx-auto">
-        <div className="form-group mb-5">
+      <div className="form-group mb-5 input-group">
           <input
             type="text"
-            value={loading ? "" : "chromagz/" + userData.username || ""}
+            id="profileLink"
+            value={loading ? "" : "https://chromagz.com/" + userData.username || ""}
+            className="form-control fs-12 text-center"
+            readOnly
+           
+          />
+          <div className="input-group-append">
+              <button
+                className="btn btn-primary btn-sm w-100 " 
+                onClick={copyToClipboard}
+              >
+                COPY
+              </button>
+            </div>
+          {/* <button
+            className="btn btn-link fs-60 text-blue position-absolute end-0 translate-middle-y" style={{marginTop:'-18px'}}
+            onClick={copyToClipboard}
+          >
+           COPY
+          </button> */}
+        </div>
+        {/* <div className="form-group mb-5">
+          <input
+            type="text"
+            value={loading ? "" : "https://chromagz.com/" + userData.username || ""}
             className="form-control fs-12 text-center"
             readOnly
           />
-        </div>
+        </div> */}
         <div className="fs-12">Share via:-</div>
         <div className="d-flex justify-content-around gap-3">
+       
           <a
             className="btn btn-link fs-12 text-dark"
             href={
               `whatsapp://send?text=` +
               encodeURIComponent(
-                `Hi, I am ${userData.name}. You can find me on Chromagz App: chromagz/${userData.username}`
+                `Hi, I am ${userData.name}. You can find me on Chromagz App: https://chromagz.com/${userData.username}`
               )
             }
-            target="_blank"
+            target="_WhatsUpPage"
           >
             <img
               src={imagePath + "whatsapp.png"}
-              width="80"
-              height="80"
+              width="40"
+              height="40"
               alt="whatsapp"
+              className="d-flex flex-column align-items-center"
             />
-            WhatsApp
+            <span style={{ margin:'8px' }}>WhatsApp</span>
           </a>
+          
+        
           <a
             className="btn btn-link fs-12 text-dark"
             href={`mailto:?subject=See%20me%20on%20chromagz&body=${encodeURIComponent(
-              `Hi, I am ${userData.name}. You can find me on CHROMAGZ App: chromagz/${userData.username}`
+              `Hi, I am ${userData.name}. You can find me on CHROMAGZ App: https://chromagz.com/${userData.username}`
             )}`}
-            target="_blank"
+            target="_Gmail"
           >
             <img
               src={imagePath + "gmail.png"}
-              width="80"
-              height="80"
+              width="40"
+              height="40"
               alt="email"
+              className="d-flex flex-column align-items-center"
             />
-            Gmail
+           <span style={{ margin:'8px' }}>Gmail</span> 
           </a>
+         
         </div>
       </div>
     </div>

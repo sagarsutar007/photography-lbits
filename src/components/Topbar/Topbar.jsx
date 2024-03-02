@@ -6,7 +6,7 @@ const Topbar = (props) => {
   const navigate = useNavigate();
 
   const handleFooterClick = () => {
-    // Navigate to the dashboard page when the footer is clicked
+    
     navigate("/dashboard");
   };
   return (

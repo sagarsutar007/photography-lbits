@@ -23,7 +23,7 @@ const ProfileSetup = () => {
   const [city, setCity] = useState("");
   const [error, setError] = useState("");
   const [logUser, setLogUser] = useState(null);
-  const [currentStep, setCurrentStep] = useState(1); // Added state for current step
+  const [currentStep, setCurrentStep] = useState(1); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,8 +35,6 @@ const ProfileSetup = () => {
       return false;
     }
 
-    // You can add more specific validations for each field here if needed
-
     setError("");
     return true;
   };
@@ -47,12 +45,7 @@ const ProfileSetup = () => {
       return;
     }
     const userid = logUser.id;
-    // if (name === "" || email === "" || state === "" || city === "") {
-    //   setError("Please fill out all fields.");
-    //   return;
-    // }
-    // setError("");
-
+   
     try {
       const response = await axios.post(BACKEND_URL + "/update-user", {
         name,
@@ -73,7 +66,7 @@ const ProfileSetup = () => {
     }
   };
   const handleBack = () => {
-    navigate(-1); // Go back to the previous page
+    navigate(-1); 
   };
 
 
