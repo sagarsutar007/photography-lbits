@@ -23,7 +23,7 @@ const Upi = () => {
   }, []);
 
   const isUpiValid = (upi) => {
-    // UPI URL regex pattern (basic pattern, you can customize based on your requirements)
+
     const upiRegex = /^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
     return upiRegex.test(upi);
@@ -39,15 +39,6 @@ const Upi = () => {
     setError("");
     const userid = logUser.id;
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const userid = logUser.id;
-  //   if (upi === "") {
-  //     setError("Please fill out the field");
-  //     return;
-  //   }
-
-  //   setError("");
 
     try {
       const response = await axios.post(BACKEND_URL + "/update-user", {

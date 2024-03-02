@@ -18,22 +18,24 @@ const getUser = () => {
 
 const CredentialsSetup = () => {
   const [username, setName] = useState("");
-  const [qualification, setQualification] = useState("");
+  // const [qualification, setQualification] = useState("");
   const [pin, setPin] = useState("");
   const [conf_pin, setConfirmPin] = useState("");
   const [error, setError] = useState("");
   const [logUser, setLogUser] = useState(null);
   const [isUsernameAvailable, setIsUsernameAvailable] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+ 
+
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(2); // Added state for current step
+  const [currentStep, setCurrentStep] = useState(2);
   useEffect(() => {
     setLogUser(getUser());
   }, []);
   const validateForm = () => {
     if (
       username.trim() === "" ||
-      qualification.trim() === "" ||
+      // qualification.trim() === "" ||
       pin.trim() === "" ||
       conf_pin.trim() === ""
     ) {
@@ -66,7 +68,7 @@ const CredentialsSetup = () => {
   const checkUsernameAvailability = async () => {
     if (username === "") {
       setIsUsernameAvailable(true); 
-      return; // No need to check if the username is empty
+      return; 
     }
 
     try {
@@ -110,35 +112,12 @@ const handlePinChange = (e) => {
     }
     const userid = logUser.id;
 
-    // if (
-    //   username === "" ||
-    //   qualification === "" ||
-    //   pin === "" ||
-    //   conf_pin === ""
-    // ) {
-    //   setError("Please fill out all fields.");
-    //   return;
-    // }
-
-    // if (pin !== conf_pin) {
-    //   setError("Pin and confirm pin should match");
-    //   return;
-    // }
-
-    // setError("");
-
-    // const isAvailable = isUsernameAvailable;
-
-    // if (!isAvailable) {
-    //   setError("Username is not available. Please choose another one.");
-    //   return;
-    // }
-
+  
     try {
       setIsLoading(true);
       const response = await axios.post(BACKEND_URL + "/update-user", {
         username,
-        qualification,
+        // qualification,
         pin,
         userid,
       });
@@ -156,8 +135,9 @@ const handlePinChange = (e) => {
     }
   };
   const handleBack = () => {
-    navigate(-1); // Go back to the previous page
+    navigate(-1); 
   };
+ 
 
   return (
     <div className="container">
@@ -183,29 +163,36 @@ const handlePinChange = (e) => {
                 This username is not available. Please choose another one.
               </p>
             )}
-            <input
+            {/* <input
               type="text"
               className={`form-control mb-3 ${styles.form_control}`}
               placeholder="Qualifications"
               value={qualification}
               onChange={(e) => setQualification(e.target.value)}
-            />
+            /> */}
+             <div className={`input-group mb-3 ${styles.form_control}`} style={{ display: 'flex', flexDirection:'row' }}>
             <input
+             
               type="password"
-              className={`form-control mb-3 ${styles.form_control}`}
+              className="form-control"
               placeholder="Set 4 Digit Login Pin"
               value={pin}
               maxLength={4}
               onChange={(e) => setPin(e.target.value)}
-            />
+              
+              ></input>
+        </div>
+        <div className={`input-group mb-3 ${styles.form_control}`}>
             <input
               type="password"
-              className={`form-control mb-3 ${styles.form_control}`}
+              className="form-control"
               placeholder="Confirm Login Pin"
               value={conf_pin}
               maxLength={4}
               onChange={(e) => setConfirmPin(e.target.value)}
+              
             />
+        </div>
             {error && <p className="text-danger text-center fs-12">{error}</p>}
             <button className="btn btn-primary w-100" disabled={isLoading}>
               {isLoading ? "Processing..." : "Continue"}

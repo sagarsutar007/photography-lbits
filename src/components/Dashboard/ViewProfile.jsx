@@ -104,7 +104,7 @@ const ViewProfile = () => {
     return baseStyle;
   };
   return (
-    <div className="v-95">
+    <div >
       <Topbar prevPage={"/dashboard"} pageTitle={"View Profile"} />
       <div className="col-4 mx-auto">
         <div className="text-center my-2">
@@ -113,7 +113,7 @@ const ViewProfile = () => {
               src={
                 profile && profile.profile_img
                   ? profile.profile_img
-                  : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+                  : "https://i.postimg.cc/ryZWWrhb/pexels-omar-houchaimi-752525.jpg"
               }
               alt=""
               className="w-100 rounded-circle"
@@ -251,9 +251,9 @@ const ViewProfile = () => {
             />
           </div>
         )}
-      </div>
-      <div className="row mt-3">
-        <div className="col-10 mx-auto">
+      {/* </div>
+      <div className="row mt-3"> */}
+        {/* <div className="col-10 mx-auto"> */}
           {/* {profile.services > 0 && (
             <button
               className="btn btn-outline-primary rounded-pill w-100 fs-12 mb-3"
@@ -284,16 +284,16 @@ const ViewProfile = () => {
             Send Message
           </button> */}
 
-          <Portfolio/>
+          <Portfolio source="viewProfile" />
           
 
 
-        </div>
-        {profile.calendly && (
+        {/* </div> */}
+        {/* {profile.calendly && (
           <div className="App mt-4 v-120">
             <InlineWidget url={profile.calendly} />
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );

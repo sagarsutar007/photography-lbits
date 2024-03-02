@@ -18,13 +18,12 @@ const ManageService = () => {
   const [logUser, setLogUser] = useState(getUser());
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState([]);// Changed from an array to a single file
+  const [images, setImages] = useState([]); 
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
-    // const files = Array.from(e.target.files);
-    // setImages(file);
+   
     const files = Array.from(e.target.files);
 
     if (files.length > 1) {
@@ -32,7 +31,7 @@ const ManageService = () => {
       e.target.value = null;
     } else {
       setImages(files);
-      setError(""); // Clear error if only one file is selected
+      setError(""); 
     }
 
   };
@@ -49,9 +48,7 @@ const ManageService = () => {
       formData.append("userid", logUser.id);
       formData.append("title", title);
       formData.append("description", description);
-      formData.append("services_img", images[0]); // Take only the first image
-
-      // Append each file to the form data
+      formData.append("services_img", images[0]); 
       images.forEach((file, index) => {
         formData.append(`services_img[${index}]`, file);
       });

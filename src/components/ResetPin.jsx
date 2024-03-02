@@ -16,9 +16,9 @@ const getUser = () => {
 
 const ResetPin = () => {
   const [logUser, setLogUser] = useState(getUser());
-  const [oldPin, setOldPin] = useState(""); // Add state for oldPin
-  const [newPin, setNewPin] = useState(""); // Add state for newPin
-  const [confPin, setConfPin] = useState(""); // Add state for confPin
+  const [oldPin, setOldPin] = useState(""); 
+  const [newPin, setNewPin] = useState(""); 
+  const [confPin, setConfPin] = useState(""); 
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const isNumeric = (value) => /^\d+$/.test(value);
@@ -28,8 +28,7 @@ const ResetPin = () => {
       setError("Old Pin, New Pin, and Confirm Pin should contain only numbers.");
       return;
     }
-  // const handleSubmit = () => {
-  //   console.log(newPin);
+  
     if (oldPin === "") {
       setError("Please enter old pin");
     } else if (newPin === "") {
@@ -118,3 +117,4 @@ const ResetPin = () => {
 };
 
 export default ResetPin;
+

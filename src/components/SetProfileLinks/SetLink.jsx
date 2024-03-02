@@ -1,4 +1,4 @@
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams,useNavigate } from "react-router-dom";
 import style from "./SetProfileLinks.module.css";
 import * as Icon from "react-bootstrap-icons";
 import Phone from "./Phone";
@@ -10,15 +10,21 @@ import Resume from "./Resume";
 import Whatsapp from "./Whatsapp";
 import Telegram from "./Telegram";
 import { FOOTER_URL } from "../../utilities/constants";
+import Smartphone from "./Smartphone";
 const SetLink = () => {
   let { type } = useParams();
+  const navigate = useNavigate();
+
+  const navigateToDashboard = () => {
+    navigate("/dashboard"); // Replace "/dashboard" with the actual path of your dashboard page
+  };
   return (
     <div className="v-90">
       <div className={style.topBar}>
         <NavLink to="/set-profile-links" className={style.backButton}>
           <Icon.ChevronDoubleLeft />
         </NavLink>
-        <span className={style.topBarLogo}><img src={FOOTER_URL}></img></span>
+        <span className={style.topBarLogo}><img src={FOOTER_URL} onClick={navigateToDashboard} alt="Footer Logo" /></span>
       </div>
       {type === "phone" && <Phone />}
       {type === "email" && <Email />}
@@ -44,12 +50,8 @@ const SetLink = () => {
       {type === "website" && (
         <Url image={"website.png"} label={"Website"} field={"website"} />
       )}
-      {type === "upi" && (
-         <Url image={"upi.png"} label={"Upi"} field={"upi"} />
-      )}
-      {type === "smartphone" && (
-        <Url image={"smartphone.png"} label={"Smartphone"} field={"smartphone"} placeholder={"Enter Mobile Number"}/>
-      )}
+      {type === "upi" && <Upi/>}
+      {type === "smartphone" && <Smartphone />}
       <div className="my-5"></div>
     </div>
   );

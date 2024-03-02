@@ -1,388 +1,11 @@
-// // // import React, { useEffect, useState } from "react";
-// // // import axios from "axios";
-// // // import { BACKEND_URL } from "../utilities/constants";
-// // // import { useParams } from "react-router-dom";
-
-// // // const getUser = () => {
-// // //   let user = localStorage.getItem("user");
-// // //   if (user) user = JSON.parse(user);
-// // //   else user = null;
-// // //   return user;
-// // // };
-
-// // // const Portfolio = () => {
-// // //   const [portfolio, setPortfolio] = useState([]);
-// // //   const { username } = useParams();
-
-// // //   useEffect(() => {
-// // //     const fetchData = async () => {
-// // //       try {
-// // //         const user = getUser();
-// // //         const response = await axios.post(BACKEND_URL + "/portfolio", {
-// // //           userid: user.id,
-// // //           username: username,
-// // //         });
-
-// // //         // Log the entire response to check its structure
-// // //         console.log("Response:", response);
-
-// // //         if (response.data && response.data.result) {
-// // //           setPortfolio(response.data.result);
-// // //         } else {
-// // //           console.error("Invalid response data:", response.data);
-// // //         }
-// // //       } catch (error) {
-// // //         console.error("Error fetching portfolio data:", error);
-// // //       }
-// // //     };
-
-// // //     fetchData();
-// // //   }, [username]);
-
-// // //   return (
-// // //     <div className="v-95">
-// // //       <h3 style={{ marginTop: "35px",color:'#678983',fontFamily:'sans-serif' }}>Portfolio</h3>
-
-// // //       <table style={{ border: "none" }} className="table">
-       
-     
-// // //           {portfolio.map((portfolioItem) => (
-// // //             <React.Fragment key={portfolioItem.id}>
-// // //               <tr>
-               
-// // //                 <td style={{paddingRight:'65px'}}>{portfolioItem.event}</td>
-// // //                 <td >{portfolioItem.eventdate}</td>
-// // //               </tr>
-// // //               <tr>
-// // //                 <td colSpan="3">
-// // //                   <div style={{ display: "flex",marginTop:'20px' }}>
-// // //                     {portfolioItem.images.map((image, index) => (
-// // //                       <React.Fragment key={index}>
-// // //                         <img
-// // //                           src={BACKEND_URL + "/assets/images/" + image.file_name}
-// // //                           className="mb-2"
-// // //                           style={{ width: "85px",height:"80px", marginRight: "10px" }}
-// // //                           alt=""
-// // //                         />
-// // //                       </React.Fragment>
-// // //                     ))}
-// // //                   </div>
-// // //                 </td>
-// // //               </tr>
-// // //             </React.Fragment>
-// // //           ))}
-       
-// // //       </table>
-// // //       <iframe width="200" height="250" src="http://example.com/your-video-url" frameborder="0" allowfullscreen></iframe>
-      
-// // //     </div>
-// // //   );
-// // // };
-
-// // // export default Portfolio;
-// // import React, { useEffect, useState } from "react";
-// // import axios from "axios";
-// // import { BACKEND_URL } from "../utilities/constants";
-// // import { useParams } from "react-router-dom";
-// // import VideoPlayer from './VideoPlayer'; // Adjust the import path
-// // import { Youtube } from "react-bootstrap-icons";
-
-// // const getUser = () => {
-// //   let user = localStorage.getItem("user");
-// //   if (user) user = JSON.parse(user);
-// //   else user = null;
-// //   return user;
-// // };
-
-// // const Portfolio = () => {
-// //   const [portfolio, setPortfolio] = useState([]);
-// //   const { username } = useParams();
-
-// //   useEffect(() => {
-// //     const fetchData = async () => {
-// //       try {
-// //         const user = getUser();
-// //         const response = await axios.post(BACKEND_URL + "/portfolio", {
-// //           userid: user.id,
-// //           username: username,
-// //         });
-
-// //         // Log the entire response to check its structure
-// //         console.log("Response:", response);
-
-// //         if (response.data && response.data.result) {
-// //           setPortfolio(response.data.result);
-// //         } else {
-// //           console.error("Invalid response data:", response.data);
-// //         }
-// //       } catch (error) {
-// //         console.error("Error fetching portfolio data:", error);
-// //       }
-// //     };
-
-// //     fetchData();
-// //   }, [username]);
-
-// //   return (
-// //     <div className="v-95">
-// //       <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>Portfolio</h3>
-
-// //       <table style={{ border: "none" }} className="table">
-
-// //         {portfolio.map((portfolioItem) => (
-// //           <React.Fragment key={portfolioItem.id}>
-// //             <tr>
-
-// //               <td style={{ paddingRight: '65px' }}>{portfolioItem.event}</td>
-// //               <td >{portfolioItem.eventdate}</td>
-// //             </tr>
-// //             <tr>
-// //               <td colSpan="3">
-// //                 <div style={{ display: "flex", marginTop: '20px' }}>
-// //                   {portfolioItem.images.map((image, index) => (
-// //                     <React.Fragment key={index}>
-// //                       <img
-// //                         src={BACKEND_URL + "/assets/images/" + image.file_name}
-// //                         className="mb-2"
-// //                         style={{ width: "85px", height: "80px", marginRight: "10px" }}
-// //                         alt=""
-// //                       />
-// //                     </React.Fragment>
-// //                   ))}
-// //                 </div>
-// //               </td>
-// //             </tr>
-// //             <iframe width="200" height="200" src={portfolioItem.Youtube_urls} ></iframe>
-// //           </React.Fragment>
-          
-// //         ))}
-         
-// //       </table>
-      
-// //     </div>
-// //   );
-// // };
-
-// // export default Portfolio;
-
-
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { BACKEND_URL } from "../utilities/constants";
-// import { useParams } from "react-router-dom";
-// import YouTube from "react-youtube";
-
-// const getUser = () => {
-//   let user = localStorage.getItem("user");
-//   if (user) user = JSON.parse(user);
-//   else user = null;
-//   return user;
-// };
-
-// const Portfolio = () => {
-//   const [portfolio, setPortfolio] = useState([]);
-//   const { username } = useParams();
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const user = getUser();
-//         const response = await axios.post(BACKEND_URL + "/portfolio", {
-//           userid: user.id,
-//           username: username,
-//         });
-
-//         // Log the entire response to check its structure
-//         console.log("Response:", response);
-
-//         if (response.data && response.data.result) {
-//           setPortfolio(response.data.result);
-//         } else {
-//           console.error("Invalid response data:", response.data);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching portfolio data:", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, [username]);
-
-//   return (
-//     <div className="v-95">
-//       <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>Portfolio</h3>
-
-//       <table style={{ border: "none" }} className="table">
-
-//         {portfolio.map((portfolioItem) => (
-//           <React.Fragment key={portfolioItem.id}>
-//             <tr>
-//               <td >{portfolioItem.event}</td>
-//               <td style={{ paddingRight: '50px' }}> {portfolioItem.eventdate}</td>
-//             </tr>
-//             <tr>
-//               <td colSpan="3">
-//                 <div style={{ display: "flex", marginTop: '20px', flexWrap: 'wrap' }}>
-//                   {portfolioItem.images.map((image, index) => (
-//                     <React.Fragment key={index}>
-//                       <img
-//                         src={BACKEND_URL + "/assets/images/" + image.file_name}
-//                         className="mb-2"
-//                         style={{ width: "85px", height: "80px", marginRight: "10px" }}
-//                         alt=""
-//                       />
-                      
-//                     </React.Fragment>
-//                   ))}
-//                 </div>
-//               </td>
-//             </tr>
-
-//             <tr>
-//               <td colSpan="3">
-//               <iframe width="265" height="200"
-// src={`https://www.youtube.com/embed/${portfolioItem.Youtube_urls}`}>
-// </iframe>
-//               </td>
-//             </tr>
-//           </React.Fragment>
-          
-          
-//         ))}
-
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default Portfolio;
-
-// import React, { useEffect, useState } from "react";
-// import axios from "axios";
-// import { BACKEND_URL } from "../utilities/constants";
-// import { useParams } from "react-router-dom";
-
-// import Modal from 'react-modal';
-
-// const getUser = () => {
-//   let user = localStorage.getItem("user");
-//   if (user) user = JSON.parse(user);
-//   else user = null;
-//   return user;
-// };
-
-// const Portfolio = () => {
-//   const [portfolio, setPortfolio] = useState([]);
-//   const [modalIsOpen, setModalIsOpen] = useState(false);
-//   const [modalImage, setModalImage] = useState('');
-//   const { username } = useParams();
-
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const user = getUser();
-//         const response = await axios.post(BACKEND_URL + "/portfolio", {
-//           userid: user.id,
-//           username: username,
-//         });
-
-//         // Log the entire response to check its structure
-//         console.log("Response:", response);
-
-//         if (response.data && response.data.result) {
-//           setPortfolio(response.data.result);
-//         } else {
-//           console.error("Invalid response data:", response.data);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching portfolio data:", error);
-//       }
-//     };
-
-//     fetchData();
-//   }, [username]);
-
-//   const openModal = (image) => {
-//     setModalImage(image);
-//     setModalIsOpen(true);
-//   };
-
-//   const closeModal = () => {
-//     setModalImage('');
-//     setModalIsOpen(false);
-//   };
-
-//   return (
-//     <div className="v-95">
-//       <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>Portfolio</h3>
-
-//       <table style={{ border: "none" }} className="table">
-
-//         {portfolio.map((portfolioItem) => (
-//           <React.Fragment key={portfolioItem.id}>
-//             <tr>
-//               <td>{portfolioItem.event}</td>
-//               <td style={{ paddingRight: '50px' }}>{portfolioItem.eventdate}</td>
-//             </tr>
-//             <tr>
-//               <td colSpan="3">
-//                 <div style={{ display: "flex", marginTop: '20px', flexWrap: 'wrap' }}>
-//                   {portfolioItem.images.map((image, index) => (
-//                     <React.Fragment key={index}>
-//                       <img
-//                         src={BACKEND_URL + "/assets/images/" + image.file_name}
-//                         className="mb-2"
-//                         style={{ width: "85px", height: "80px", marginRight: "10px", cursor: 'pointer' }}
-//                         alt=""
-//                         onClick={() => openModal(BACKEND_URL + "/assets/images/" + image.file_name)}
-//                       />
-//                     </React.Fragment>
-//                   ))}
-//                 </div>
-//               </td>
-//             </tr>
-
-//             <tr>
-//               <td colSpan="3">
-//                 <iframe width="265" height="200"
-//                   src={`https://www.youtube.com/embed/${portfolioItem.Youtube_urls}`}>
-//                 </iframe>
-//               </td>
-//             </tr>
-//           </React.Fragment>
-//         ))}
-
-//         <Modal
-//           isOpen={modalIsOpen}
-//           onRequestClose={closeModal}
-//           style={{
-//             content: {
-//               top: '50%',
-//               left: '50%',
-//               right: 'auto',
-//               bottom: 'auto',
-//               marginRight: '-50%',
-//               transform: 'translate(-50%, -50%)',
-//             }
-//           }}
-//         >
-//           <button onClick={closeModal}>close</button>
-//           <img src={modalImage} alt="Zoomed In" style={{ width: "450px" }} />
-//         </Modal>
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default Portfolio;
-
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../utilities/constants";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
-import { FaTimes } from "react-icons/fa"; // Import the FaTimes cross-mark icon
+import { FaTimes } from "react-icons/fa"; 
+
+import { Carousel } from 'react-bootstrap';
 
 const getUser = () => {
   let user = localStorage.getItem("user");
@@ -391,14 +14,33 @@ const getUser = () => {
   return user;
 };
 
-const Portfolio = () => {
+const Portfolio = ({source}) => {
   const [portfolio, setPortfolio] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalImage, setModalImage] = useState('');
+  const [activeIndex, setActiveIndex] = useState(0);
   const { username } = useParams();
-
+ 
   useEffect(() => {
+    
     const fetchData = async () => {
+      try {
+        // const user = getUser();
+        const response = await axios.post(BACKEND_URL + "/portfolio", {
+          // userid: user.id,
+          username: username,
+        });
+
+        if (response.data && response.data.result) {
+          setPortfolio(response.data.result);
+        } else {
+          console.error("Invalid response data:", response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching portfolio data:", error);
+      }
+    };
+    const fetchDataForManage = async () => {
       try {
         const user = getUser();
         const response = await axios.post(BACKEND_URL + "/portfolio", {
@@ -416,9 +58,19 @@ const Portfolio = () => {
       }
     };
 
-    fetchData();
+    if (source === "managePortfolio")
+    {
+      fetchDataForManage();
+    }
+    else{
+      fetchData();
+    }
   }, [username]);
 
+  
+  const navigate = useNavigate();
+ 
+  
   const openModal = (image) => {
     setModalImage(image);
     setModalIsOpen(true);
@@ -429,76 +81,239 @@ const Portfolio = () => {
     setModalIsOpen(false);
   };
 
-  return (
-    <div className="v-95">
-      <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>Portfolio</h3>
+  const handleSelect = (selectedIndex, e) => {
+    setActiveIndex(selectedIndex);
+  };
+const handleClick =(id)=>{
+  navigate("/manage-portfolio/edit-portfolio?id="+ id)} 
 
-      <table style={{ border: "none" }} className="table">
+  const CustomCarousel = ({ images }) => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const handleSelect = (selectedIndex, e) => {
+      setActiveIndex(selectedIndex);
+    };
+    useEffect(() => {
+      const interval = setInterval(() => {
+        handleNext();
+      }, 3000); // Adjust the interval time as needed
+  
+      return () => clearInterval(interval);
+    }, [activeIndex]);
+  
+    
+  
+    const handlePrev = () => {
+      setActiveIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    };
+  
+    const handleNext = () => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % images.length);
+    };
 
-        {portfolio.map((portfolioItem) => (
-          <React.Fragment key={portfolioItem.id}>
-            <tr style={{display:'flex'}}>
-              <td style={{ marginRight: '120px' }}>{portfolioItem.event}</td>
-              <td >{portfolioItem.eventdate}</td>
-            </tr>
-            <tr>
-              <td colSpan="3">
-                <div style={{ display: "flex", marginTop: '20px', flexWrap: 'wrap' }}>
-                  {portfolioItem.images.map((image, index) => (
-                    <React.Fragment key={index}>
-                      <img
-                        src={BACKEND_URL + "/assets/images/" + image.file_name}
-                        className="mb-2"
-                        style={{ width: "85px",alignItems:'center',height: "80px", marginRight: "35px", cursor: 'pointer' }}
-                        alt=""
-                        onClick={() => openModal(BACKEND_URL + "/assets/images/" + image.file_name)}
-                      />
-                    </React.Fragment>
-                  ))}
-                </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td colSpan="3">
-                <iframe width="265" height="200"
-                  src={`https://www.youtube.com/embed/${portfolioItem.Youtube_urls}`}>
-                </iframe>
-              </td>
-            </tr>
-          </React.Fragment>
+    const handleSlideEnd = (direction) => {
+      if (direction === 'left' && activeIndex === 0) {
+        setActiveIndex(images.length - 1);
+      } else if (direction === 'right' && activeIndex === images.length - 1) {
+        setActiveIndex(0);
+      }
+    };
+    return (
+      <div style={{ position: 'relative', marginBottom: '20px' }}>
+      <Carousel
+        activeIndex={activeIndex}
+        onSelect={handleSelect}
+        interval={null}
+        pause="hover"
+        wrap={false}
+        keyboard={true}
+        controls={false}
+        indicators={false} 
+        pauseOnHover={false}
+        onSlideEnd={(direction) => handleSlideEnd(direction)}
+      >
+        {images.map((image, imgIndex) => (
+          <Carousel.Item key={imgIndex}>
+            <img
+              className="d-block mx-auto"
+              src={BACKEND_URL + "/assets/images/" + image.file_name}
+              alt={`Slide ${imgIndex}`}
+              onClick={() => openModal(BACKEND_URL + "/assets/images/" + image.file_name)}
+              style={{ cursor: 'pointer', width:'100%', maxHeight: '150px' }}
+            />
+          </Carousel.Item>
         ))}
-
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
+        {/* {images.length > 1 && (
+        <div>
+          <div
+            className="carousel-control-prev"
+            style={{ cursor: 'pointer' }}
+            onClick={handlePrev}
+          >
+            &lt;
+          </div>
+          <div
+            className="carousel-control-next"
+            style={{ cursor: 'pointer' }}
+            onClick={handleNext}
+          >
+            &gt;
+          </div>
+        </div>
+      )} */}
+        {/* Custom circular prev and next buttons */}
+        {/* <div
           style={{
-            content: {
-              top: '50%',
-              left: '50%',
-              right: 'auto',
-              bottom: 'auto',
-              marginRight: '-50%',
-              transform: 'translate(-50%, -50%)',
-            }
+            position: 'absolute',
+            top: '50%',
+            left: '5px',
+            transform: 'translateY(-50%)',
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            color: 'white',
+            fontSize: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
           }}
+          onClick={handlePrev}
         >
-          <button
-            onClick={closeModal}
+          &lt;
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            right: '5px',
+            transform: 'translateY(-50%)',
+            width: '40px',
+            height: '40px',
+            borderRadius: '50%',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            color: 'white',
+            fontSize: '20px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+          }}
+          onClick={handleNext}
+        >
+          &gt;
+        </div> */}
+      </Carousel>
+        {/* Custom styles for positioning the indicators at the bottom */}
+        <div
+        style={{
+          position: 'absolute',
+          bottom: '-20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+        }}
+      >
+        {images.map((_, index) => (
+          <div
+            key={index}
             style={{
-              border: "none",
-              background: "none",
-              cursor: "pointer",
-              position: "absolute",
-              top: "-5px",
-              right: "10px",
+              width: '10px',
+              height: '10px',
+              borderRadius: '50%',
+              background: activeIndex === index ? '#007bff' : '#ccc',
+              margin: '0 5px',
+              cursor: 'pointer',
+            }}
+            onClick={() => setActiveIndex(index)}
+          ></div>
+        ))}
+      </div>
+    </div>
+      
+    );
+  }
+
+
+  if (portfolio.length === 0) {
+    return null; // Return null or a loading indicator if there's no portfolio data
+  }
+
+  return (
+    <div>
+      <h5 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>Portfolio</h5>
+
+      {portfolio.map((portfolioItem, index) => (
+        <div key={portfolioItem.id} className="mb-4">
+          <div style={{ display:'flex', justifyContent:'space-between' }}>
+            
+                 <p style={{ textTransform: 'capitalize' }}>{portfolioItem.event}</p>
+                {/* <p>{portfolioItem.eventdate}</p> */}
+                {source === "managePortfolio" ? <div style={{
+                color: 'blue' , // Change color to your preference '#678983'
+                textDecoration: 'underline', // Add underline
+                fontWeight:'bolder',
+                cursor: 'pointer',
+              }}  onClick={() =>handleClick(portfolioItem.id)}>View More</div> : <p>{portfolioItem.eventdate}</p>}
+          </div>
+          <div className="text-center mt-3">
+          {portfolioItem.images.length > 1 ? (
+            <CustomCarousel images={portfolioItem.images} />
+            ) : (
+              <img
+                className="d-block mx-auto"
+                src={BACKEND_URL + "/assets/images/" + portfolioItem.images[0].file_name}
+                alt="Single Image"
+                onClick={() => openModal(BACKEND_URL + "/assets/images/" + portfolioItem.images[0].file_name)}
+                style={{ cursor: 'pointer', width:'100%', maxHeight: '150px' }}
+              />
+            )}
+          </div>
+
+          <div className="text-center mt-5">
+            <iframe
+              title={`YouTube Video ${portfolioItem.id}`}
+              width="100%"
+              height="200"
+              src={`https://www.youtube.com/embed/${portfolioItem.Youtube_urls}`}
+              frameBorder="0"
+              allowFullScreen
+            ></iframe>
+          </div>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            style={{
+              content: {
+                top: '50%',
+                left: '50%',
+                right: 'auto',
+                bottom: 'auto',
+                marginRight: '-50%',
+                transform: 'translate(-50%, -50%)',
+                
+              }
             }}
           >
-            <FaTimes size={30} style={{ color: "#333" }} />
-          </button>
-          <img src={modalImage} alt="Zoomed In" style={{ width: "450px" }} />
-        </Modal>
-      </table>
+            <button
+              onClick={closeModal}
+              style={{
+                border: "none",
+                background: "none",
+                cursor: "pointer",
+                position: "absolute",
+                top: "-3px",
+                right: "10px",
+               
+              }}
+            >
+              <FaTimes size={30} style={{ color: "#333" }} />
+            </button>
+            <img src={modalImage} alt="Zoomed In" style={{ width: "350px",padding:'10px' }} />
+          </Modal>
+         
+        </div>
+      ))}
     </div>
   );
 };

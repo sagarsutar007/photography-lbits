@@ -15,7 +15,7 @@ const getUser = () => {
   return user;
 };
 const EditProfile = () => {
-  // eslint-disable-next-line
+ 
   const [logUser, setLogUser] = useState(null);
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
@@ -44,6 +44,7 @@ const EditProfile = () => {
 
     fetchData();
   }, []);
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -92,17 +93,16 @@ const EditProfile = () => {
       <Topbar prevPage={"/dashboard"} pageTitle={"Edit Profile"} />
       <div className="col-4 mx-auto">
         <div className="text-center my-2">
+        <label htmlFor="file" className="profile-image-label">
           <img
             src={loading ? avatar : userData.profile_img || avatar}
             alt=""
-            className="w-100 rounded-circle"
+            
+            className="w-100 rounded-circle profile-image"
           />
-          {/* <Link
-            to={"/set-profile-links"}
-            className="btn btn-outline-primary w-100 rounded-pill fs-14 mt-4"
-          >
-            Edit Links
-          </Link> */}
+          </label>
+
+         
         </div>
       </div>
       <form action="#" method="post" encType="multipart/form-data">

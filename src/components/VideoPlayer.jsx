@@ -89,15 +89,7 @@ const VideoPlayer = () => {
           )}
         </div>
       ))}
-      {/* {latestVideoId && (
-        <iframe
-          width="350"
-          height="200"
-          src={`https://www.youtube.com/embed/${latestVideoId}`}
-          title="YouTube Video Player"
-          allowFullScreen
-        ></iframe>
-      )} */}
+     
     </div>
   );
 };

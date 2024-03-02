@@ -16,3 +16,32 @@
   font-weight: 800;
   font-size: 18px;
 }
+
+.profileImageContainer {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 4px; /* Reduce padding */
+  display: none;
+}
+
+.profileImageContainer:hover .dropdown {
+  display: block;
+}
+
+.dropdown div {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.dropdown div:hover {
+  background-color: #f5f5f5;
+}

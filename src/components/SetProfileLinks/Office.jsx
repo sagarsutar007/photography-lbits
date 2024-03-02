@@ -18,10 +18,10 @@ const Office = () => {
   const imagePath = process.env.PUBLIC_URL + "/assets/images/";
 
   const isPhoneNumberValid = (phoneNumber) => {
-    // Check if the phone number consists of only digits
+   
     const isNumeric = /^\d+$/.test(phoneNumber);
 
-    // Check if it's a valid Indian mobile number with or without the "+91" prefix
+   
     const isValidIndianNumber =
       /^\+?91[6789]\d{9}$/.test(phoneNumber) || /^\d{10}$/.test(phoneNumber);
 
@@ -37,15 +37,7 @@ const Office = () => {
 
     setError("");
     const userid = logUser.id;
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const userid = logUser.id;
-  //   if (telephone === "") {
-  //     setError("Please fill out the field");
-  //     return;
-  //   }
-
-  //   setError("");
+ 
 
     try {
       const response = await axios.post(BACKEND_URL + "/update-user", {
@@ -76,9 +68,16 @@ const Office = () => {
           <input
             type="numbers"
             className="form-control"
-            onChange={(e) => setOffice(e.target.value)}
+            onChange={(e) => {
+              const inputValue = e.target.value;
+            if (/^\d{0,10}$/.test(inputValue)) {
+            setOffice(inputValue);
+            setError("");
+            }
+          }}
             defaultValue={logUser.telephone}
             placeholder="+91 | 99388XXXXX"
+            maxLength={10}
           />
         </div>
         {error && <p className="text-danger text-center fs-12">{error}</p>}

@@ -10,13 +10,7 @@ const getUser = () => {
   return user;
 };
 
-//   if (user) {
-//     user = JSON.parse(user);
-//   } else {
-//     user = null;
-//   }
-//   return user;
-// };
+
 
 const Smartphone = () => {
   const [logUser, setLogUser] = useState(null);
@@ -29,20 +23,12 @@ const Smartphone = () => {
     setLogUser(getUser());
   }, []);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const userid = logUser.id;
-  //   if (smartphone === "") {
-  //     setError("Please fill out the field");
-  //     return;
-  //   }
-
-  //   setError("");
+ 
   const isPhoneNumberValid = (phoneNumber) => {
-    // Check if the phone number consists of only digits
+   
     const isNumeric = /^\d+$/.test(phoneNumber);
 
-    // Check if it starts with "+91" and is followed by 10 digits or it is exactly 10 digits
+    
     const isValidIndianNumber =
       /^(\+91)?[6789]\d{9}$/.test(phoneNumber) || /^\d{10}$/.test(phoneNumber);
 

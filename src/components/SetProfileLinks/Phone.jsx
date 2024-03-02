@@ -19,10 +19,10 @@ const Phone = () => {
 
 
   const isPhoneNumberValid = (phoneNumber) => {
-    // Check if the phone number consists of only digits
+  
     const isNumeric = /^\d+$/.test(phoneNumber);
 
-    // Check if it's a valid Indian mobile number with or without the "+91" prefix
+   
     const isValidIndianNumber =
       /^\+?91[6789]\d{9}$/.test(phoneNumber) || /^\d{10}$/.test(phoneNumber);
 
@@ -67,9 +67,17 @@ const Phone = () => {
           <input
             type="numbers"
             className="form-control"
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              // setPhone(e.target.value)
+              const inputValue = e.target.value;
+            if (/^\d{0,10}$/.test(inputValue)) {
+            setPhone(inputValue);
+            setError("");
+            }
+            }}
             placeholder="+91 | 99388XXXXX"
             defaultValue={logUser.phone ?? ""}
+            maxLength={10} 
           />
         </div>
         {error && <p className="text-danger text-center fs-12">{error}</p>}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import style from "./Dashboard.module.css";
 import * as Icon from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
-import { FOOTER_URL } from "../../utilities/constants";
+import { FOOTER_URL, LOGO_URL } from "../../utilities/constants";
 
 const getUser = () => {
   let user = localStorage.getItem("user");
@@ -18,16 +18,20 @@ const getUser = () => {
 const Dashboard = () => {
   const imagePath = process.env.PUBLIC_URL + "/assets/images/";
   const [logUser, setLogUser] = useState(null);
+  const [showDropdown, setShowDropdown] = useState(false); 
   const navigate = useNavigate();
 
   useEffect(() => {
     const userFromStorage = getUser();
     setLogUser(userFromStorage);
-  }, []);
+  }, [logUser]);
 
   const handleClick = (type) => {
     if (type === "edit-profile") {
       navigate("/edit-profile");
+    }
+    if (type === "share-customer-event") {
+      navigate("/share-customer-event");
     }
 
     if (type === "share-profile") {
@@ -39,7 +43,7 @@ const Dashboard = () => {
     }
 
     if (type === "edit-links") {
-      navigate("/set-profile-links");
+      navigate("/set-profile-links?viewType=edit");
     }
 
     if (type === "messages") {
@@ -61,26 +65,48 @@ const Dashboard = () => {
     if (type === "scan-qr") {
       navigate("/scan-qr");
     }
+    if (type === "logout") {
+     
+      localStorage.removeItem("user");
+      navigate("/home");
+    }
   };
+  const handleProfileImageClick = () => {
+    setShowDropdown(!showDropdown);
+  };
+
 
   return (
     
     <div style={{ minHeight: "97vh" }}>
-      <div className={style.topBarLogo} style={{display:'flex'}}><img src={FOOTER_URL}></img>
-      <div className={style.topBar} style={{marginLeft:'250px'}}>
+      <div className={style.topBarLogo} style={{display:'flex',height:'20px',marginTop:'30px'}}><img src={LOGO_URL}></img>
+      <div className={style.topBar} style={{marginLeft:'120px'}}>
+      <div
+            className={style.profileImageContainer}
+            onClick={handleProfileImageClick}
+            onMouseEnter={() => setShowDropdown(true)}
+            onMouseLeave={() => setShowDropdown(false)}
+          >
         <img
           src={
             logUser && logUser.profile_img
               ? logUser.profile_img
-              : "https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+              : "https://i.postimg.cc/ryZWWrhb/pexels-omar-houchaimi-752525.jpg"
           }
           height="40px"
           width="40px"
           alt=""
         />
+        {showDropdown && (
+              <div className={style.dropdown}>
+                <div onClick={() => handleClick("edit-profile")}>Edit Profile</div>
+                <div onClick={() => handleClick("logout")}>Logout</div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      {logUser && <div className={style.username}>Hi, {logUser.name}</div>}
+      {logUser && <div className={style.username} style={{marginTop:'15px'}}>Hi, {logUser.name}</div>}
       <div className="banner my-3">
          <img src={imagePath + "banner.jpg"} className="img-fluid" style={{borderRadius:'10px',height:'170px',width:'100%' , alignSelf: 'center'}}  alt="" />{/* */}
       </div>
@@ -94,7 +120,7 @@ const Dashboard = () => {
           <Icon.PersonCheck size={25} />
           <p className="fs-10 mb-0 mt-1 text-center">View Profile</p>
         </div>
-        <div
+        {/* <div
           className="col-3 d-flex align-items-center justify-content-center flex-column p-3"
           onClick={() => {
             handleClick("edit-profile");
@@ -102,13 +128,28 @@ const Dashboard = () => {
         >
           <Icon.PersonGear size={25} />
           <p className="fs-10 mb-0 mt-1 text-center">Edit Profile</p>
-        </div>
-          <div
+        // </div> */}
+
+
+<div
           className="col-3 d-flex align-items-center justify-content-center flex-column p-3"
           onClick={() => {
-            handleClick("manage-portfolio");
+            handleClick("share-customer-event");
           }}
         >
+          <Icon.PersonVcard size={25} />
+          <p className="fs-10 mb-0 mt-1 text-center">ShareCustomer
+            <br />
+            Event</p>
+        </div>
+
+           <div
+          className="col-3 d-flex align-items-center justify-content-center flex-column p-3"
+         onClick={() => {
+         handleClick("manage-portfolio");
+         }}
+        >
+       
           <Icon.Clipboard size={25} />
           <p className="fs-10 mb-0 mt-1 text-center">
             Manage
