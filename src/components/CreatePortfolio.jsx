@@ -85,7 +85,7 @@ const validateYoutubeURL = (url) => {
         formData.append("event", event);
         formData.append("location", location);
         formData.append("eventdescription", eventdescription);
-        formData.append("YoutubeUrls",extractYoutubeVideoId(Youtubeurls));
+        formData.append("YoutubeURLs", extractYoutubeVideoId(Youtubeurls));
         formData.append("eventdate", eventdate);
        
   
@@ -206,7 +206,7 @@ const validateYoutubeURL = (url) => {
             </div>
             <div className="col-9">
             <input
-              type="link"
+              type="text"
               id="Youtube_urls"
               multiple
               onChange={(e) => setYoutubeURLs(e.target.value)}
