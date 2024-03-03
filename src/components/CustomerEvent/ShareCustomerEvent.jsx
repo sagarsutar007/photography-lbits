@@ -205,8 +205,8 @@ const ShareCustomerEvent = () => {
   return (
     <div >
       <Topbar prevPage={"/dashboard"} pageTitle={"customerevent"} />
-      <div className="d-flex align-items-center">
-        <div className="mr-4"> {/* Adjust margin as needed */}
+      <div className="d-flex " style={{justifyContent:'space-between'}}>
+        <div > 
           <b>CustomerEvent:</b>
         </div>
         <div>

@@ -188,6 +188,7 @@ import { useParams,useLocation, useNavigate } from "react-router-dom";
 import Modal from 'react-modal';
 import { FaTimes } from "react-icons/fa";
 import * as Icon from "react-bootstrap-icons";
+import { Helmet } from "react-helmet-async";
 
 const getUser = () => {
   let user = localStorage.getItem("user");
@@ -211,6 +212,8 @@ const ShareEvent = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
+  const [imageUrl,setImageUrl] = useState("")
+
   
   useEffect(() => {
     const fetchData = async () => {
@@ -226,6 +229,8 @@ const ShareEvent = () => {
         if (response.data && response.data.result) {
           // console.log(response.data.result);
           setCustomer(response.data.result);
+          console.log(response.data.result);
+          setImageUrl(BACKEND_URL + "assets/images/" + response.data.result.images[0].file_name)
         } else {
           console.error("Invalid response data:", response.data);
         }
@@ -272,14 +277,29 @@ const ShareEvent = () => {
  // Check if the page is accessed directly
  const isAccessedDirectly = !document.referrer || document.referrer === '';
   return (
+    <>
     <div>
+     { customer && 
+     <Helmet>
        
+      <link rel="canconical" href={shareableLink}/>
+        <meta property="og:title" content={customer.event} />
+        <meta property="og:description" content={customer.eventdescription} />
+        <meta property="og:image" itemprop="image" content={imageUrl} />
+        <meta property="og:url"  content={ shareableLink} />
+        <meta property="og:type" content="event info" />
+        <meta name="whatsup:card" content="summary_large_image"/>
+
+     </Helmet>}
        <div style={{display:'flex',justifyContent:'space-between'}}>
-      <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>Customer</h3>
-      {!isAccessedDirectly && (<div onClick={() => {handleClick("dashboard")}}><Icon.X size={25}  /></div>)}
+      <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>{customer.eventdescription}</h3>
+      {isAccessedDirectly && (<div onClick={() => {handleClick("dashboard")}}><Icon.X size={25}  /></div>)}
       </div>
       {customer && (
         <div >
+          <div style={{display:'flex',justifyContent:'space-between'}}>
+          <p>{customer.event}</p><p>{customer.eventdate}</p>
+          </div>
       <div>
         {customer.images &&
       <img
@@ -316,7 +336,7 @@ const ShareEvent = () => {
                 onError={() => setYoutubeError(true)}
               ></iframe>
               </div>
-              {isAccessedDirectly ? (
+              {!isAccessedDirectly ? (
             <p></p>
           ) : (
                 <div>
@@ -325,7 +345,7 @@ const ShareEvent = () => {
             <div>
               <div className="form-group mb-3 input-group">
           <input
-            type="text"
+            type="link"
             id="shareableLink"
             value={shareableLink}
             className="form-control fs-12 text-center"
@@ -344,14 +364,16 @@ const ShareEvent = () => {
             <div className="fs-12">Share via:-</div>
             <a
             className="btn btn-link fs-12 text-dark"
-            href={
-              `whatsapp://send?text=` +
-              encodeURIComponent(
-                `Hi, Attend our auspicious event {title} on {date}: ${shareableLink}`
-              )
-            }
+          //   href={`whatsapp://send?text=${encodeURIComponent(
+          //     `Hi, Attend our auspicious event '${customer.event}' on '${customer.eventdate}' for more details. Click on the link below: ${shareableLink}`
+          //     )}%0a${encodeURIComponent(imageUrl)}`}
+          //   target="_WhatsUpPage"
+          // >
+          href={`whatsapp://send?text=${encodeURIComponent(
+            `Hi, Attend our auspicious event '${customer.event}' on '${customer.eventdate}' for more details. Click on the link below: ${shareableLink}`
+          )}%0a${encodeURIComponent(`${BACKEND_URL}/assets/images/${customer.images[0].file_name}`)}`}
             target="_WhatsUpPage"
-          >
+           > 
             <img
               src={imagePath + "whatsapp.png"}
               width="40"
@@ -403,6 +425,9 @@ const ShareEvent = () => {
         <p style={{ color: 'red' }}>Oops! It seems that there was an error loading the YouTube video. Please check your browser settings or try again later.</p>
       )}
     </div>
+
+    </>
+ 
   );
 };
 
