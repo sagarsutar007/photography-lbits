@@ -281,15 +281,12 @@ const ShareEvent = () => {
     <div>
      { customer && 
      <Helmet>
-       
-      <link rel="canconical" href={shareableLink}/>
-        <meta property="og:title" content={customer.event} />
-        <meta property="og:description" content={customer.eventdescription} />
-        <meta property="og:image" itemprop="image" content={imageUrl} />
-        <meta property="og:url"  content={ shareableLink} />
-        <meta property="og:type" content="event info" />
-        <meta name="whatsup:card" content="summary_large_image"/>
-
+       <title>{`Take a Peek into ${customer.event} Celebration`} </title>
+       <meta name='description' content={customer.eventdescription} />
+       <meta property="og:title" content={`Take a Peek into ${customer.event} Celebration`} />
+       <meta property="og:description" content={customer.eventdescription} />
+       <meta property="og:type" content={"website"} />
+       <link rel="canonical" href={`https://chromagz.com/share-event?id=${customer.id}`} />
      </Helmet>}
        <div style={{display:'flex',justifyContent:'space-between'}}>
       <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>{customer.eventdescription}</h3>
@@ -307,7 +304,7 @@ const ShareEvent = () => {
       src={BACKEND_URL + "/assets/images/" + customer.images[0].file_name}
       className="mb-4"
       width="100%"
-      height="200"
+      height="auto"
       style={{  marginRight: "35px", cursor: 'pointer' }}
       alt=""
       onClick={() => openModal(BACKEND_URL + "/assets/images/" + customer.images[0].file_name)}
@@ -316,27 +313,29 @@ const ShareEvent = () => {
       
     </div>
     <div className="mb-4">
-    <iframe   
-               width="100%"
-                height="200"
-                src={`https://www.google.com/maps/embed/v1/place?q=${customer.location}&key=${GOOGLE_MAPS_API_KEY}`}
-                allowFullScreen
-                title="Location"
-                frameBorder="1"
-              ></iframe>
+    <p>See the glimpse of {customer.event}</p>
+        <iframe
+      width="100%"
+      height="300"
+      src={`https://www.youtube.com/embed/${customer.Youtube_urls}`}
+      allowFullScreen
+      title="YouTube Video"
+      frameBorder="0"
+      onError={() => setYoutubeError(true)}
+    ></iframe>
+    </div>
+    <div style={{ marginBottom: '80px' }}>
+      <p>Click on the following view larger map to see the details in google map</p>
+      <iframe   
+        width="100%"
+          height="300"
+          src={`https://www.google.com/maps/embed/v1/place?q=${customer.location}&key=${GOOGLE_MAPS_API_KEY}`}
+          allowFullScreen
+          title="Location"
+          frameBorder="1"
+        ></iframe>
       </div>
-              <div className="mb-4">
-                 <iframe
-                width="100%"
-                height="200"
-                src={`https://www.youtube.com/embed/${customer.Youtube_urls}`}
-                allowFullScreen
-                title="YouTube Video"
-                frameBorder="0"
-                onError={() => setYoutubeError(true)}
-              ></iframe>
-              </div>
-              {!isAccessedDirectly ? (
+      {isAccessedDirectly ? (
             <p></p>
           ) : (
                 <div>

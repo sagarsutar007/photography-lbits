@@ -5,6 +5,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../../utilities/constants";
 import { useNavigate, useParams } from "react-router-dom";
 import Portfolio from "../Portfolio";
+import { Helmet } from "react-helmet-async";
 
 const getUser = () => {
   let user = localStorage.getItem("user");
@@ -105,7 +106,16 @@ const ViewProfile = () => {
   };
   return (
     <div >
-      <Topbar prevPage={"/dashboard"} pageTitle={"View Profile"} />
+    { profile && 
+     <Helmet>
+       <title>{profile.name} </title>
+       <meta name='description' content={profile.description} />
+       <meta property="og:title" content={profile.name} />
+       <meta property="og:description" content={profile.description} />
+       <meta property="og:type" content={"website"} />
+       <link rel="canonical" href={`https://chromagz.com/${username}`} />
+     </Helmet>}
+      <Topbar prevPage={"/dashboard"} pageTitle={""} />
       <div className="col-4 mx-auto">
         <div className="text-center my-2">
           {profile.profile_img && (
@@ -116,17 +126,17 @@ const ViewProfile = () => {
                   : "https://i.postimg.cc/ryZWWrhb/pexels-omar-houchaimi-752525.jpg"
               }
               alt=""
-              className="w-100 rounded-circle"
+              // className="w-100 rounded-circle"
+              style={{ width: '100px' }}
             />
           )}
         </div>
       </div>
 
       <div className="text-center fw-bold">{profile.name}</div>
-      <div className="text-center fs-10">Photography Consultant</div>
       <p className="mt-2 fs-12 text-center">{profile.description}</p>
 
-      <div className="row mt-2">
+      <div className="row mt-5 d-flex justify-content-center">
         {profile.whatsapp && (
           <div className="col-3 text-center mb-4">
             <img

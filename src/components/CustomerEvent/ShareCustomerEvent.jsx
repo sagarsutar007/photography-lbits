@@ -179,6 +179,10 @@ const ShareCustomerEvent = () => {
     // Navigate to the ManageCustomerEvent page
     navigate("/manage-customer-event");
   };
+
+  const handleClickToEdit =(id)=>{
+    navigate("/share-event?id="+ id)} 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -224,6 +228,14 @@ const ShareCustomerEvent = () => {
           <Card key={index} style={{ marginBottom: '10px' }}>
             <CardBody>
               <div >
+                 <div style={{ display:'flex', justifyContent: 'end', paddingBottom: '12px' }}>
+                    <div style={{
+                      color: 'blue', 
+                      textDecoration: 'underline',
+                      fontWeight:'bolder',
+                      cursor: 'pointer',
+                     }} onClick={() =>handleClickToEdit(event.id)}>View More</div>
+                </div>
                 <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Event Description: <p style={{fontWeight:'lighter',textTransform: 'capitalize'}}>{event.eventdescription}</p></p>
                 <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Event Date:<p style={{fontWeight:'lighter'}}> {event.eventdate}</p></p>
                 <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Event: <p style={{fontWeight:'lighter',textTransform: 'capitalize'}}>{event.event}</p></p>

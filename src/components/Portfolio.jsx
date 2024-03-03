@@ -256,21 +256,25 @@ const handleClick =(id)=>{
                 cursor: 'pointer',
               }}  onClick={() =>handleClick(portfolioItem.id)}>View More</div> : <p>{portfolioItem.eventdate}</p>}
           </div>
-          <div className="text-center mt-3">
+         { portfolioItem.images>0 && <div className="text-center mt-3">
           {portfolioItem.images.length > 1 ? (
-            <CustomCarousel images={portfolioItem.images} />
-            ) : (
-              <img
-                className="d-block mx-auto"
-                src={BACKEND_URL + "/assets/images/" + portfolioItem.images[0].file_name}
-                alt="Single Image"
-                onClick={() => openModal(BACKEND_URL + "/assets/images/" + portfolioItem.images[0].file_name)}
-                style={{ cursor: 'pointer', width:'100%', maxHeight: '150px' }}
-              />
+            <div style={{ marginBottom: '40px' }}>
+              <CustomCarousel images={portfolioItem.images} />
+            </div>
+            ) : ( 
+              <div style={{ marginBottom: '20px' }}>
+                <img
+                  className="d-block mx-auto"
+                  src={"https://pvthenextlevelphotography.com/wp-content/uploads/2023/03/2.jpg"}
+                  alt="Single Image"
+                  onClick={() => openModal(BACKEND_URL + "/assets/images/" + portfolioItem.images[0].file_name)}
+                  style={{ cursor: 'pointer', width:'100%', maxHeight: '150px' }}
+                />
+              </div>
             )}
-          </div>
+          </div> }
 
-          <div className="text-center mt-5">
+          <div className="text-center mt-1">
             <iframe
               title={`YouTube Video ${portfolioItem.id}`}
               width="100%"
@@ -314,6 +318,7 @@ const handleClick =(id)=>{
          
         </div>
       ))}
+      <div style={{ height: '60px' }}></div>
     </div>
   );
 };
