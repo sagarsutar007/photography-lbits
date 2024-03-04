@@ -70,12 +70,12 @@ const validateYoutubeURL = (url) => {
         setError("Please enter eventdescription");
       }else if (eventdate === "") {
           setError("Please enter eventdate");
-      }else if (images.length === 0) {
-        setError("Please select at least one image and upto 6 images");
-      }else if (Youtubeurls === "") {
-        setError("Please enter the Youtube URL");
-      }else if (!validateYoutubeURL(Youtubeurls)) {
-        setError("Invalid YouTube URL. Please enter a valid YouTube URL.");
+      // }else if (images.length === 0) {
+      //   setError("Please select at least one image and upto 6 images");
+      // }else if (Youtubeurls === "") {
+      //   setError("Please enter the Youtube URL");
+      // }else if (!validateYoutubeURL(Youtubeurls)) {
+        // setError("Invalid YouTube URL. Please enter a valid YouTube URL.");
       }else if (images.length > 6) {
         setError("Upload only 6 images.");
       }else {
@@ -87,8 +87,16 @@ const validateYoutubeURL = (url) => {
         formData.append("eventdescription", eventdescription);
         formData.append("YoutubeURLs", extractYoutubeVideoId(Youtubeurls));
         formData.append("eventdate", eventdate);
-       
-  
+
+        if (Youtubeurls.trim() !== "") {
+          const videoId = extractYoutubeVideoId(Youtubeurls);
+          if (videoId) {
+            formData.append("YoutubeURLs", videoId);
+          } else {
+            setError("Invalid YouTube URL. Please enter a valid YouTube URL.");
+            return;
+          }
+        }
        
         images.forEach((file, index) => {
           formData.append(`portfolio_img[${index}]`, file);

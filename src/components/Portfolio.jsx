@@ -30,7 +30,7 @@ const Portfolio = ({source}) => {
           // userid: user.id,
           username: username,
         });
-
+        console.log("Response data:", response.data); // Log the response for debugging
         if (response.data && response.data.result) {
           setPortfolio(response.data.result);
         } else {
@@ -50,6 +50,7 @@ const Portfolio = ({source}) => {
 
         if (response.data && response.data.result) {
           setPortfolio(response.data.result);
+
         } else {
           console.error("Invalid response data:", response.data);
         }
@@ -88,6 +89,8 @@ const handleClick =(id)=>{
   navigate("/manage-portfolio/edit-portfolio?id="+ id)} 
 
   const CustomCarousel = ({ images }) => {
+    console.log("Images in CustomCarousel:", images); // Log images for
+
     const [activeIndex, setActiveIndex] = useState(0);
     const handleSelect = (selectedIndex, e) => {
       setActiveIndex(selectedIndex);
@@ -256,7 +259,9 @@ const handleClick =(id)=>{
                 cursor: 'pointer',
               }}  onClick={() =>handleClick(portfolioItem.id)}>View More</div> : <p>{portfolioItem.eventdate}</p>}
           </div>
-         { portfolioItem.images>0 && <div className="text-center mt-3">
+          {/* <div> {portfolioItem.images.length}</div> */}
+         { portfolioItem.images.length>0 && 
+         <div className="text-center mt-3">
           {portfolioItem.images.length > 1 ? (
             <div style={{ marginBottom: '40px' }}>
               <CustomCarousel images={portfolioItem.images} />
@@ -265,16 +270,19 @@ const handleClick =(id)=>{
               <div style={{ marginBottom: '20px' }}>
                 <img
                   className="d-block mx-auto"
-                  src={"https://pvthenextlevelphotography.com/wp-content/uploads/2023/03/2.jpg"}
+                  // src={"https://pvthenextlevelphotography.com/wp-content/uploads/2023/03/2.jpg"}
+                  src={BACKEND_URL + "/assets/images/" + portfolioItem.images[0].file_name}
                   alt="Single Image"
                   onClick={() => openModal(BACKEND_URL + "/assets/images/" + portfolioItem.images[0].file_name)}
                   style={{ cursor: 'pointer', width:'100%', maxHeight: '150px' }}
                 />
               </div>
             )}
-          </div> }
+          </div> 
+          }
 
           <div className="text-center mt-1">
+          {portfolioItem.Youtube_urls && (
             <iframe
               title={`YouTube Video ${portfolioItem.id}`}
               width="100%"
@@ -282,7 +290,9 @@ const handleClick =(id)=>{
               src={`https://www.youtube.com/embed/${portfolioItem.Youtube_urls}`}
               frameBorder="0"
               allowFullScreen
+              
             ></iframe>
+            )}
           </div>
           <Modal
             isOpen={modalIsOpen}

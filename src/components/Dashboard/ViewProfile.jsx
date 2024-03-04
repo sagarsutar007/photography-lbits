@@ -108,7 +108,7 @@ const ViewProfile = () => {
     <div >
     { profile && 
      <Helmet>
-       <title>{profile.name} </title>
+       <title>CHROMAGZ</title>
        <meta name='description' content={profile.description} />
        <meta property="og:title" content={profile.name} />
        <meta property="og:description" content={profile.description} />

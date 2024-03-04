@@ -190,11 +190,12 @@ import { FaTimes } from "react-icons/fa";
 import * as Icon from "react-bootstrap-icons";
 import { Helmet } from "react-helmet-async";
 
-const getUser = () => {
+const getUserExisitce = () => {
   let user = localStorage.getItem("user");
-  if (user) user = JSON.parse(user);
-  else user = null;
-  return user;
+  if (user) return true;
+  else
+  return false;
+
 };
 
 const GOOGLE_MAPS_API_KEY = "AIzaSyAoYQVZtYNzXjpFx7dUCNe_eFqcEepwOp0";
@@ -273,9 +274,11 @@ const ShareEvent = () => {
       alert("Link copied to clipboard!");
     }
   };
+  
+ 
 
  // Check if the page is accessed directly
- const isAccessedDirectly = !document.referrer || document.referrer === '';
+ const isAccessedDirectly =  getUserExisitce();
   return (
     <>
     <div>
@@ -335,7 +338,7 @@ const ShareEvent = () => {
           frameBorder="1"
         ></iframe>
       </div>
-      {isAccessedDirectly ? (
+      {!isAccessedDirectly ? (
             <p></p>
           ) : (
                 <div>
@@ -368,9 +371,10 @@ const ShareEvent = () => {
           //     )}%0a${encodeURIComponent(imageUrl)}`}
           //   target="_WhatsUpPage"
           // >
-          href={`whatsapp://send?text=${encodeURIComponent(
-            `Hi, Attend our auspicious event '${customer.event}' on '${customer.eventdate}' for more details. Click on the link below: ${shareableLink}`
-          )}%0a${encodeURIComponent(`${BACKEND_URL}/assets/images/${customer.images[0].file_name}`)}`}
+          href={`https://api.whatsapp.com/send?&text=${shareableLink}`}
+          // ://send?text=${encodeURIComponent(
+          //   `Hi, Attend our auspicious event '${customer.event}' on '${customer.eventdate}' for more details. Click on the link below: ${shareableLink}`
+          // )}%0a${encodeURIComponent(`${BACKEND_URL}/assets/images/${customer.images[0].file_name}`)}`}
             target="_WhatsUpPage"
            > 
             <img
