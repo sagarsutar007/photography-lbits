@@ -190,7 +190,7 @@ import { FaTimes } from "react-icons/fa";
 import * as Icon from "react-bootstrap-icons";
 import { Helmet } from "react-helmet-async";
 
-const getUserExisitce = () => {
+const getUser = () => {
   let user = localStorage.getItem("user");
   if (user) return true;
   else
@@ -214,8 +214,31 @@ const ShareEvent = () => {
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
   const [imageUrl,setImageUrl] = useState("")
-
+  const [countdown, setCountdown] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
   
+
+  function calculateCountdown(response) {
+    const eventDate = new Date(response?.data?.result?.eventdate); // Use optional chaining
+          const now = new Date();
+          const timeDiff = eventDate.getTime() - now.getTime();
+          const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+          setCountdown({ days, hours, minutes, seconds });
+          return {
+            days,
+            hours,
+            minutes,
+            seconds,
+          };
+        }
+      
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -232,13 +255,24 @@ const ShareEvent = () => {
           setCustomer(response.data.result);
           console.log(response.data.result);
           setImageUrl(BACKEND_URL + "assets/images/" + response.data.result.images[0].file_name)
+          calculateCountdown(response); // Calculate the countdown with the response
+              // Update countdown every second
+        const countdownInterval = setInterval(() => {
+          calculateCountdown(response);
+        }, 1000);
+        // Clear the interval when the component is unmounted or when there's an error
+        return () => clearInterval(countdownInterval);
+          
         } else {
           console.error("Invalid response data:", response.data);
         }
       } catch (error) {
         console.error("Error fetching customer data:", error);
+        // If an error occurs, set default values for countdown
+        calculateCountdown({ data: { result: { eventdate: new Date() } }});
       }
     };
+    
 
     fetchData();
   }, [id]);
@@ -275,10 +309,13 @@ const ShareEvent = () => {
     }
   };
   
+  
+  
+
  
 
  // Check if the page is accessed directly
- const isAccessedDirectly =  getUserExisitce();
+ const isAccessedDirectly =  getUser();
   return (
     <>
     <div>
@@ -291,15 +328,46 @@ const ShareEvent = () => {
        <meta property="og:type" content={"website"} />
        <link rel="canonical" href={`https://chromagz.com/share-event?id=${customer.id}`} />
      </Helmet>}
+     <div>
        <div style={{display:'flex',justifyContent:'space-between'}}>
-      <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>{customer.eventdescription}</h3>
-      {isAccessedDirectly && (<div onClick={() => {handleClick("dashboard")}}><Icon.X size={25}  /></div>)}
+        <p></p>
+        {isAccessedDirectly && (<div style={{marginTop: "10px"}} onClick={() => {handleClick("dashboard")}}><Icon.X size={25}  /></div>)}
+        </div>
+      {/* <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>{customer.eventdescription}</h3> */}
+      <h1 style={{ fontFamily: 'Almendra Display', color: '#678983',marginTop: "10px", textAlign:"center"}}>{customer.event}</h1>
+      <h2 style={{ fontFamily: 'Alex Brush, cursive', color: '#678983',marginTop: "10px", textAlign:"center"}}>Save The Date</h2>
+     
       </div>
       {customer && (
-        <div >
-          <div style={{display:'flex',justifyContent:'space-between'}}>
-          <p>{customer.event}</p><p>{customer.eventdate}</p>
+        <div  className="content">
+          <div className="mb-4"> 
+            <p style={{textAlign:'center',fontFamily:'monospace'}}>{customer.eventdescription} on {customer.eventdate}</p>
+            </div>
+            {/* Countdown Timer */}
+            <div style={{ display: 'flex', justifyContent:'space-evenly'}}>
+              <div className="mb-3">
+                <span style={{ fontSize: '36px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px' }}>{countdown.days}</span><br />
+                <span style={{ fontSize: '18px' }}>Days</span>
+             </div>
+             <div>
+             
+                <span style={{ fontSize: '36px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px' }}>{countdown.hours}</span><br />
+                <span style={{ fontSize: '18px' }}>Hours</span>
+           </div>
+              <div >
+                <span style={{ fontSize: '36px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px' }}>{countdown.minutes}</span><br />
+                <span style={{ fontSize: '18px' }}>Minutes</span>
+              </div>
+              <div >
+                <span style={{ fontSize: '36px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px'}}>{countdown.seconds}</span><br />
+                <span style={{ fontSize: '18px' }}>Seconds</span>
+             
+              </div>
+
           </div>
+          {/* <div style={{display:'flex',justifyContent:'space-between'}}>
+          <p>{customer.event}</p><p>{customer.eventdate}</p>
+          </div> */}
       <div>
         {customer.images &&
       <img
@@ -307,7 +375,7 @@ const ShareEvent = () => {
       src={BACKEND_URL + "/assets/images/" + customer.images[0].file_name}
       className="mb-4"
       width="100%"
-      height="auto"
+      height="200"
       style={{  marginRight: "35px", cursor: 'pointer' }}
       alt=""
       onClick={() => openModal(BACKEND_URL + "/assets/images/" + customer.images[0].file_name)}
@@ -319,7 +387,7 @@ const ShareEvent = () => {
     <p>See the glimpse of {customer.event}</p>
         <iframe
       width="100%"
-      height="300"
+      height="200"
       src={`https://www.youtube.com/embed/${customer.Youtube_urls}`}
       allowFullScreen
       title="YouTube Video"
@@ -327,11 +395,11 @@ const ShareEvent = () => {
       onError={() => setYoutubeError(true)}
     ></iframe>
     </div>
-    <div style={{ marginBottom: '80px' }}>
+    <div className="mb-5">
       <p>Click on the following view larger map to see the details in google map</p>
       <iframe   
         width="100%"
-          height="300"
+          height="200"
           src={`https://www.google.com/maps/embed/v1/place?q=${customer.location}&key=${GOOGLE_MAPS_API_KEY}`}
           allowFullScreen
           title="Location"

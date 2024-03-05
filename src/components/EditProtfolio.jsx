@@ -260,7 +260,7 @@
 
 
 import {  useNavigate,useLocation } from "react-router-dom";
-
+import * as Icon from "react-bootstrap-icons";
 import Topbar from "./Topbar/Topbar";
 // import avatar from "./avatar.png";
 import { useEffect, useState } from "react";
@@ -278,6 +278,32 @@ const getUser = () => {
   }
   return user;
 };
+
+const ConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
+  return (
+    isOpen && (
+      <div
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          backgroundColor: 'linen',
+          padding: "20px",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          zIndex: 9999,
+          borderRadius:'10px'
+        }}
+      >
+        <p>Are you sure, want to delete this image?</p>
+        <div style={{display:'flex',justifyContent:'space-evenly'}} ><button className="btn btn-danger" onClick={onConfirm}>Yes</button>
+        <button onClick={onClose} className="btn btn-secondary">No</button>
+        </div>
+      </div>
+    )
+  );
+};
+
 const EditProtfolio = () => {
   const [logUser, setLogUser] = useState(null);
   const [userData, setUserData] = useState({});
@@ -289,6 +315,37 @@ const EditProtfolio = () => {
   const queryParams = new URLSearchParams(location.search);
   const id = queryParams.get('id');
   const navigate = useNavigate();
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+
+// const handleDeleteImage = (index) => {
+//   setSelectedImageIndex(index);
+//   const isConfirmed = window.confirm("Are you sure you want to delete this image?");
+//   if (isConfirmed) {
+//     // Perform deletion
+//     const updatedImages = [...images];
+//     updatedImages.splice(index, 1);
+//     setImages(updatedImages);
+//   }
+// };
+const handleDeleteImage = (index) => {
+  setSelectedImageIndex(index);
+  setIsConfirmationOpen(true);
+  document.body.style.overflow = "hidden"; // Prevent scrolling
+};
+
+const handleConfirmDelete = () => {
+  const updatedImages = [...images];
+  updatedImages.splice(selectedImageIndex, 1);
+  setImages(updatedImages);
+  setIsConfirmationOpen(false);
+  document.body.style.overflow = "auto"; // Prevent scrolling
+};
+
+const handleCancelDelete = () => {
+  setIsConfirmationOpen(false);
+  document.body.style.overflow = "auto"; // Prevent scrolling
+};
 
   useEffect(() => {
     const userFromStorage = getUser();
@@ -340,8 +397,8 @@ const EditProtfolio = () => {
     const userFromStorage = getUser();
     try {
       const formData = new FormData();
-      formData.append("id", userFromStorage.id);
-      formData.append("name", userData.name || "");
+      formData.append("id", id);
+      // formData.append("name", userData.name || "");
       formData.append("event", userData.event || "");
       formData.append("location", userData.location || "");
       formData.append("eventdescription", userData.eventdescription|| "");
@@ -395,7 +452,7 @@ const EditProtfolio = () => {
               type="text"
               id="event"
               value={loading ? "Loading..." : userData.event || ""}
-              // onChange={handleInputChange}
+              onChange={handleInputChange}
               className="form-control bg-light-grey border-0 fs-12"
             />
           </div>
@@ -415,7 +472,7 @@ const EditProtfolio = () => {
               name="location"
               id="location"
               value={loading ? "Loading..." : userData.location || ""}
-              // onChange={handleInputChange}
+              onChange={handleInputChange}
               className="form-control bg-light-grey border-0 fs-12"
             />
           </div>
@@ -435,7 +492,7 @@ const EditProtfolio = () => {
               name="eventdate"
               id="eventdate"
               value={loading ? "Loading..." : userData.eventdate || ""}
-              // onChange={handleInputChange}
+              onChange={handleInputChange}
               className="form-control bg-light-grey border-0 fs-12"
             />
           </div>
@@ -455,7 +512,7 @@ const EditProtfolio = () => {
               name="event description"
               id="event description"
               value={loading ? "Loading..." : userData.eventdescription || ""}
-              // onChange={handleInputChange}
+              onChange={handleInputChange}
               className="form-control bg-light-grey border-0 fs-12"
             />
           </div>
@@ -476,13 +533,16 @@ const EditProtfolio = () => {
               name="event_media"
               id="file"
               className="form-control bg-light-grey border-0 fs-12"
-              // onChange={handleFileChange} // Make sure to add the onChange handler
+              onChange={handleFileChange} // Make sure to add the onChange handler
               // multiple // Allow selecting multiple files
             />
             {images && images.length > 0 && (
       <div className="my-2">
         {/* <p>Selected Images:</p> */}
         {images.map((image, index) => (
+          <div key={index} className="position-relative my-2">
+            <button type="button" style={{color:'darkgray',marginLeft:'90%',borderRadius:'0px'}} className="btn btn-sm position-relative top-0 "onClick={() => handleDeleteImage(index)} >
+            <Icon.TrashFill size={25} /></button>
           <img
             key={index}
             // src={URL.createObjectURL(image)}
@@ -490,11 +550,36 @@ const EditProtfolio = () => {
             alt={`Image ${index + 1}`}
             className="img-thumbnail"
           />
+         
+              </div>
         ))}
       </div>
     )}
-
+    {/* Confirmation Modal
+  {isModalOpen && (
+    <div className="modal fade show" tabIndex="-1" role="dialog">
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Confirmation</h5>
+            <button type="button" className="btn-close" onClick={handleCancelDelete}></button>
           </div>
+          <div className="modal-body">
+            <p>Are you sure you want to delete this image?</p>
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" onClick={handleCancelDelete}>
+              No
+            </button>
+            <button type="button" className="btn btn-danger" onClick={handleConfirmDelete}>
+              Yes
+            </button>
+          </div>
+        </div>
+          </div>
+        </div>
+  )} */}
+        </div>
         </div>
 
         <div className="row my-2">
@@ -513,7 +598,7 @@ const EditProtfolio = () => {
               id="Youtube URL"
               value={loading ? "Loading..." : youtubeUrls || ""}
               // onChange={(e) => setYoutubeUrls(e.target.value)}
-              // onChange={handleInputChange}
+              onChange={handleInputChange}
               className="form-control bg-light-grey border-0 fs-12"
             />
              {youtubeUrls && (
@@ -530,7 +615,7 @@ const EditProtfolio = () => {
             )}
           </div>
         </div>
-        {/* <div className="row">
+        <div className="row">
           <div className="col-4 ms-auto">
             <button
               type="button"
@@ -540,7 +625,12 @@ const EditProtfolio = () => {
               SAVE
             </button>
           </div>
-        </div> */}
+        </div>
+        <ConfirmationModal
+          isOpen={isConfirmationOpen}
+          onConfirm={handleConfirmDelete}
+          onClose={handleCancelDelete}
+        />
       </form>
     </div>
   );
