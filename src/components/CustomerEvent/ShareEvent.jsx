@@ -189,6 +189,7 @@ import Modal from 'react-modal';
 import { FaTimes } from "react-icons/fa";
 import * as Icon from "react-bootstrap-icons";
 import { Helmet } from "react-helmet-async";
+import celebration from "../../assets/celebration.gif";
 
 const getUser = () => {
   let user = localStorage.getItem("user");
@@ -218,7 +219,7 @@ const ShareEvent = () => {
     days: 0,
     hours: 0,
     minutes: 0,
-    seconds: 0,
+    // seconds: 0,
   });
   
 
@@ -229,13 +230,15 @@ const ShareEvent = () => {
           const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
           const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
           const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-          setCountdown({ days, hours, minutes, seconds });
+          // const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+          setCountdown({ days, hours, minutes, 
+            // seconds 
+          });
           return {
             days,
             hours,
             minutes,
-            seconds,
+            // seconds,
           };
         }
       
@@ -318,7 +321,7 @@ const ShareEvent = () => {
  const isAccessedDirectly =  getUser();
   return (
     <>
-    <div>
+    <div style={{ backgroundColor: 'rgba(200, 168, 152, 0.1)', margin: '0px' }}>
      { customer && 
      <Helmet>
        <title>{`Take a Peek into ${customer.event} Celebration`} </title>
@@ -328,43 +331,42 @@ const ShareEvent = () => {
        <meta property="og:type" content={"website"} />
        <link rel="canonical" href={`https://chromagz.com/share-event?id=${customer.id}`} />
      </Helmet>}
-     <div>
-       <div style={{display:'flex',justifyContent:'space-between'}}>
+     <div style={{ position: 'relative' }}>
+       <div style={{ position: 'absolute', top: 5 }}><img style={{ width: '100%' }} src={celebration} alt="" /></div>
+       <div style={{display:'flex',justifyContent:'space-between', paddingTop: '20px'}}>
         <p></p>
-        {isAccessedDirectly && (<div style={{marginTop: "10px"}} onClick={() => {handleClick("dashboard")}}><Icon.X size={25}  /></div>)}
+        {/* {isAccessedDirectly && (<div style={{marginTop: "10px"}} onClick={() => {handleClick("dashboard")}}><Icon.X size={25}  /></div>)} */}
         </div>
       {/* <h3 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>{customer.eventdescription}</h3> */}
-      <h1 style={{ fontFamily: 'Almendra Display', color: '#678983',marginTop: "10px", textAlign:"center"}}>{customer.event}</h1>
-      <h2 style={{ fontFamily: 'Alex Brush, cursive', color: '#678983',marginTop: "10px", textAlign:"center"}}>Save The Date</h2>
+      <h1 style={{ fontFamily: 'Almendra Display', color: '#678983',marginTop: "10px", textAlign:"center", fontSize: '28px' }}> Join us <br/> on</h1>
+      <h2 style={{ fontFamily: 'Almendra Display', color: '#678983',marginTop: "10px", textAlign:"center", fontSize: '14px' }}>{customer.eventdate}</h2>
      
       </div>
       {customer && (
         <div  className="content">
           <div className="mb-4"> 
-            <p style={{textAlign:'center',fontFamily:'monospace'}}>{customer.eventdescription} on {customer.eventdate}</p>
+            {/* <p style={{textAlign:'center',fontFamily:'monospace'}}>{customer.eventdate}</p> */}
             </div>
-            {/* Countdown Timer */}
+            { 
+            countdown.hours>=0 && countdown.days>=0 && 
             <div style={{ display: 'flex', justifyContent:'space-evenly'}}>
-              <div className="mb-3">
-                <span style={{ fontSize: '36px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px' }}>{countdown.days}</span><br />
-                <span style={{ fontSize: '18px' }}>Days</span>
+              <div className="mb-3" style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                <span style={{ fontSize: '28px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px' }}>{countdown.days}</span>
+                <span style={{ fontSize: '14px' }}>Days</span>
              </div>
-             <div>
-             
-                <span style={{ fontSize: '36px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px' }}>{countdown.hours}</span><br />
-                <span style={{ fontSize: '18px' }}>Hours</span>
-           </div>
-              <div >
-                <span style={{ fontSize: '36px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px' }}>{countdown.minutes}</span><br />
-                <span style={{ fontSize: '18px' }}>Minutes</span>
-              </div>
-              <div >
-                <span style={{ fontSize: '36px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px'}}>{countdown.seconds}</span><br />
-                <span style={{ fontSize: '18px' }}>Seconds</span>
-             
-              </div>
-
-          </div>
+             <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                <span style={{ fontSize: '28px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px' }}>{countdown.hours}</span>
+                <span style={{ fontSize: '14px' }}>Hours</span>
+             </div>
+            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+              <span style={{ fontSize: '28px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px' }}>{countdown.minutes}</span>
+              <span style={{ fontSize: '14px' }}>Mins</span>
+            </div>
+              {/* <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+                <span style={{ fontSize: '28px', fontWeight: 'bold', background: '#e0e0e0', padding: '8px', borderRadius: '8px'}}>{countdown.seconds}</span>
+                <span style={{ fontSize: '14px' }}>Seconds</span>
+              </div> */}
+          </div>}
           {/* <div style={{display:'flex',justifyContent:'space-between'}}>
           <p>{customer.event}</p><p>{customer.eventdate}</p>
           </div> */}
@@ -375,7 +377,7 @@ const ShareEvent = () => {
       src={BACKEND_URL + "/assets/images/" + customer.images[0].file_name}
       className="mb-4"
       width="100%"
-      height="200"
+      height="auto"
       style={{  marginRight: "35px", cursor: 'pointer' }}
       alt=""
       onClick={() => openModal(BACKEND_URL + "/assets/images/" + customer.images[0].file_name)}
@@ -384,7 +386,7 @@ const ShareEvent = () => {
       
     </div>
     <div className="mb-4">
-    <p>See the glimpse of {customer.event}</p>
+    <p style={{ color: '#678983', paddingLeft: '6px' }}>See the glimpse of {customer.event}</p>
         <iframe
       width="100%"
       height="200"
@@ -396,7 +398,7 @@ const ShareEvent = () => {
     ></iframe>
     </div>
     <div className="mb-5">
-      <p>Click on the following view larger map to see the details in google map</p>
+      <p style={{ color: '#678983',  paddingLeft: '6px' }}>Click on the following view larger map to see the details in google map</p>
       <iframe   
         width="100%"
           height="200"
