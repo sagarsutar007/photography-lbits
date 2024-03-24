@@ -4,6 +4,16 @@ import axios from "axios";
 import { BACKEND_URL } from "../utilities/constants";
 
 const ForgotPin = () => {
+  useEffect(() => {
+    // Set the document title when the component mounts
+    document.title = "Forgot Pin";
+    
+    // Optionally, you can also reset the title when the component unmounts
+    return () => {
+      document.title = ""; // Set your default title here
+    };
+  }, []); // The empty dependency array ensures this effect runs only once
+
   // const [logUser, setLogUser] = useState(null);
   // const [phone, setPhone] = useState("");
   // const [otp, setOtp] = useState("");

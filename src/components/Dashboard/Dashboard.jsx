@@ -25,6 +25,17 @@ const Dashboard = () => {
     const userFromStorage = getUser();
     setLogUser(userFromStorage);
   }, [logUser]);
+  useEffect(() => {
+    const userFromStorage = getUser();
+    setLogUser(userFromStorage);
+
+    // Set tab title when component mounts
+    if (userFromStorage) {
+      document.title = `Welcome, ${userFromStorage.name}!`;
+    } else {
+      document.title = "Your Dashboard";
+    }
+  }, []);
 
   const handleClick = (type) => {
     if (type === "edit-profile") {
@@ -77,7 +88,6 @@ const Dashboard = () => {
 
 
   return (
-    
     <div style={{ minHeight: "97vh" }}>
       <div className={style.topBarLogo} style={{display:'flex',height:'20px',marginTop:'30px'}}><img src={LOGO_URL}></img>
       <div className={style.topBar} style={{marginLeft:'120px'}}>
