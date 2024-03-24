@@ -20,6 +20,7 @@ const SetProfileLinks = () => {
   const [currentStep, setCurrentStep] = useState(3);
   const [logUser, setLogUser] = useState(null);
   const [isedit,setIsEdit]=useState(true);
+
   useEffect(() => {
     const searchParams = new URLSearchParams(document.location.search)
    
@@ -30,8 +31,10 @@ const SetProfileLinks = () => {
     const userFromStorage = getUser();
     setLogUser(userFromStorage);
     const userId = { userid: userFromStorage.id };
-    dispatch(fetchUser(userId));
-  }, [dispatch]);
+    document.title = isedit ? ` Edit and Add Links to  Profile`:`Add Links to your  Profile`  ;
+  }, [dispatch, currentStep, isedit]);
+  // }, [dispatch]);
+  
 
   const handleImageClick = (image) => {
     navigate(`/set-link/${image}`);

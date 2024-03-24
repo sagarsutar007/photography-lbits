@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Topbar from "./Topbar/Topbar";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../utilities/constants";
 
@@ -23,6 +23,9 @@ const ResetPin = () => {
   const navigate = useNavigate();
   const isNumeric = (value) => /^\d+$/.test(value);
 
+  useEffect(() => {
+    document.title = "Reset Pin";
+  }, []); 
   const handleSubmit = () => {
     if (!isNumeric(oldPin) || !isNumeric(newPin) || !isNumeric(confPin)) {
       setError("Old Pin, New Pin, and Confirm Pin should contain only numbers.");

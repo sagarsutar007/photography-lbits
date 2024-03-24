@@ -244,7 +244,7 @@
 
 import { useNavigate } from "react-router-dom";
 import Topbar from "./Topbar/Topbar";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../utilities/constants";
 import Portfolio from "./Portfolio";
@@ -260,7 +260,7 @@ const getUser = () => {
     }
     return user;
   };
-  const CreatePortfolio = () => {
+  const ManagePortfolio = () => {
     const [logUser, setLogUser] = useState(getUser());
     const navigate = useNavigate();
     const handleCreateButtonClick = () => {
@@ -268,6 +268,15 @@ const getUser = () => {
       // You can perform any actions before navigating if needed
       navigate("/manage-portfolio/create-portfolio"); // Navigate to the createPortfolio page
     };
+    
+    useEffect(() => {
+      // Set the document title when the component mounts
+      if (logUser) {
+        document.title = `Explore Portfolios of - ${logUser.username}`;
+      } else {
+        document.title = "Manage Portfolio";
+      }
+    }, [logUser]);
   
     return (
       
@@ -291,4 +300,4 @@ const getUser = () => {
     );
   };
   
-  export default CreatePortfolio;
+  export default ManagePortfolio;

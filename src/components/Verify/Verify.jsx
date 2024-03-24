@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState,useEffect } from "react";
 import Styles from "./Verify.module.css";
 import { Link, useNavigate, useLocation} from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -16,6 +16,10 @@ const Verify = ({ userId }) => {
   const dispatch = useDispatch();
   const isSignInFlow = location.search.includes("viewType=signin");
   const isSignUpFlow = location.search.includes("viewType=signup");
+
+  useEffect(() => {
+    document.title = isSignInFlow ? " Login Verify " : isSignUpFlow ? "SignUp Verify " : "Verify";
+  }, [isSignInFlow, isSignUpFlow]);
 
 
   function handleChange(value, index) {

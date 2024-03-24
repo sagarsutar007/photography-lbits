@@ -334,12 +334,40 @@ const handleDeleteImage = (index) => {
   document.body.style.overflow = "hidden"; // Prevent scrolling
 };
 
-const handleConfirmDelete = () => {
-  const updatedImages = [...images];
-  updatedImages.splice(selectedImageIndex, 1);
-  setImages(updatedImages);
-  setIsConfirmationOpen(false);
-  document.body.style.overflow = "auto"; // Prevent scrolling
+// const handleConfirmDelete = () => {
+//   const updatedImages = [...images];
+//   updatedImages.splice(selectedImageIndex, 1);
+//   setImages(updatedImages);
+//   setIsConfirmationOpen(false);
+//   document.body.style.overflow = "auto"; // Prevent scrolling
+// };
+const handleConfirmDelete = async () => {
+  try {
+    const userFromStorage = getUser();
+    const imageToDelete = images[selectedImageIndex];
+
+    const response = await axios.get(
+      `${BACKEND_URL}deleteImageById?id=${imageToDelete.id}`
+
+    );
+
+    if (response.data.status === "SUCCESS") {
+      console.log("Image deleted successfully");
+      
+      // const updatedImages = [...images];
+      // updatedImages.splice(selectedImageIndex, 1);
+      // setImages(updatedImages);
+      // setIsConfirmationOpen(false);
+      // window.location.reload();
+      
+    } else {
+      console.error("Error deleting image:", response.data.message);
+      // Handle error, show error message, etc.
+    }
+  } catch (error) {
+    console.error("Error deleting image:", error);
+    // Handle other errors
+  }
 };
 
 const handleCancelDelete = () => {
@@ -373,6 +401,9 @@ const handleCancelDelete = () => {
           setYoutubeUrls(response.data.result.Youtube_urls || "");
         setUserData(response.data.result);
         setLoading(false); // Set loading to false once data is received
+        
+        // Set the tab title dynamically based on the event name
+        document.title = `Edit Portfolio - ${response.data.result.event || "Loading..."}`;
         } else {
           console.error("Invalid response data:", response.data);
         }
@@ -394,7 +425,7 @@ const handleCancelDelete = () => {
     setImages(Array.from(files));
   };
   const handleSave = async () => {
-    const userFromStorage = getUser();
+    // const userFromStorage = getUser();
     try {
       const formData = new FormData();
       formData.append("id", id);
@@ -406,6 +437,8 @@ const handleCancelDelete = () => {
       formData.append("qualification", userData.qualification || "");
       formData.append("eventdate", userData.eventdate || "");
 
+        // Log the request payload for debugging
+   
       // const files = fileInput.files;
       // for (let i = 0; i < files.length; i++) {
       //   formData.append(`portfolio_img[${i}]`, files[i]);
@@ -415,24 +448,97 @@ const handleCancelDelete = () => {
       images.forEach((file, index) => {
         formData.append(`portfolio_img[${index}]`, file);
       });
-
-      const response = await axios.post(
-        BACKEND_URL + "/update-portfolio",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+      console.log('Request Payload:', formData);
+      const response = axios.put('http://localhost/chroma-cheer-b/update-portfolio', formData,{
+        headers: {
+          'Content-Type': 'application/json', // Set the content type if sending JSON
+        },
+      });
+      
+      if (response.data && response.data.status === 'SUCCESS') {
+        const portfolioData = response.data.result;
+  
+        if (portfolioData.images && portfolioData.images.length > 0 && portfolioData.images[0].file_name) {
+          const imageUrl = `http://localhost/chroma-cheer-b/assets/images/${portfolioData.images[0].file_name}`;
+          console.log('Image URL:', imageUrl);
+        } else {
+          console.error('Image URL not found in the response.');
         }
-      );
-
-      if (response.data.status === "SUCCESS") {
-        navigate("/manageportfolio");
+  
+        // Format the date using JavaScript Date object or moment.js
+        const formattedDate = new Date(portfolioData.eventdate).toLocaleDateString();
+        console.log('Formatted Date:', formattedDate);
+  
+        // Handle other success scenarios if needed
+      } else {
+        console.error('Error in the response:', response.data.message);
       }
     } catch (error) {
-      console.error("Error saving data:", error);
+      console.error('Error saving data:', error);
+  
+      // Handle specific error scenarios if needed
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.error('Server responded with:', error.response.status);
+        console.error('Response data:', error.response.data);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error('No response received:', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an error
+        console.error('Error setting up the request:', error.message);
+      }
     }
   };
+  
+      // console.log('Axios Config:', {
+      //   method: 'put',
+      //   url: 'http://localhost/chroma-cheer-b/update-portfolio',
+      //   data: formData,
+      // });
+
+      // const response = await axios.post(
+      //   BACKEND_URL + "/update-portfolio",
+      //   formData,
+      //   {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   }
+      // );
+
+  //     if (response.data.status === "SUCCESS") {
+  //       navigate("/manageportfolio");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error saving data:", error);
+  //   }
+  // };
+  
+    // Check for successful response
+//     if (response.data && response.data.status === 'SUCCESS') {
+//       const portfolioData = response.data.result;
+
+//       // Check if images array is not empty and contains the required properties
+//       if (portfolioData.images && portfolioData.images.length > 0 && portfolioData.images[0].file_name) {
+//         const imageUrl = `http://localhost/chroma-cheer-b/assets/images/${portfolioData.images[0].file_name}`;
+        
+//         // Use imageUrl as needed (e.g., display in your UI)
+//         console.log('Image URL:', imageUrl);
+//       } else {
+//         console.error('Image URL not found in the response.');
+//       }
+
+//       // Format the date using JavaScript Date object or moment.js
+//       const formattedDate = new Date(portfolioData.eventdate).toLocaleDateString();
+//       console.log('Formatted Date:', formattedDate);
+//     } else {
+//       console.error('Error in the response:', response.data.message);
+//     }
+//   } catch (error) {
+//     console.error('Error saving data:', error);
+//   }
+// };
 
   return (
     <div>
