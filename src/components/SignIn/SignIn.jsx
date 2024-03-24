@@ -7,6 +7,7 @@ import { BACKEND_URL, LOGO_URL } from "../../utilities/constants";
 
 
 const SignIn = ({ type, onOtpReceived }) => {
+  document.title = type === "sign-in" ? "Login" : "Sign Up";
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);

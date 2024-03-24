@@ -35,6 +35,8 @@ const ViewProfile = () => {
 
         if (response.data.status === "SUCCESS") {
           setProfile(response.data.user);
+           // Set the tab title when the component mounts
+           document.title = `${response.data.user.name}'s Profile - CHROMAGZ`;
         }
 
         // } else {

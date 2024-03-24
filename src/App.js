@@ -30,7 +30,7 @@ import ManagePortfolio from "./components/ManagePortfolio";
 import ForgotPin from "./components/ForgotPin";
 import CreatePortfolio from "./components/CreatePortfolio";
 import EditProtfolio from "./components/EditProtfolio";
-
+import Saipavani from "./components/Saipavani";
 import ShareEvent from "./components/CustomerEvent/ShareEvent";
 import ShareCustomerEvent from "./components/CustomerEvent/ShareCustomerEvent";
 import ManageCustomerEvent from "./components/CustomerEvent/ManageCustomerEvent";
@@ -56,7 +56,11 @@ function App() {
                   path="/manage-customer-event"
                   element={<ManageCustomerEvent />}
                 />
-                <Route path="/share-event" 
+                <Route
+                  path="/sai-pavani-wedding-invitation"
+                  element={<Saipavani />}
+                />
+                <Route path="/share-event/:type" 
                 element={<ShareEvent />} 
                 />
                 <Route
@@ -66,7 +70,7 @@ function App() {
 
                  <Route
                   path="/forgot-pin"
-                  element={<Protected Component={ForgotPin} />}
+                  element={<ForgotPin/>}
                 />
                 <Route
                   path="/set-credentials"

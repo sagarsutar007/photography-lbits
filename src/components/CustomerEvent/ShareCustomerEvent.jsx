@@ -180,8 +180,10 @@ const ShareCustomerEvent = () => {
     navigate("/manage-customer-event");
   };
 
-  const handleClickToEdit =(id)=>{
-    navigate("/share-event?id="+ id)} 
+  const handleClickToEdit =(groomName, brideName)=>{
+    // navigate("/share-event?id="+ id)}
+    navigate(`/share-event/${encodeURIComponent(groomName)}&${encodeURIComponent(brideName)}-wedding-Invitation`);
+};
 
   useEffect(() => {
     const fetchData = async () => {
@@ -203,6 +205,8 @@ const ShareCustomerEvent = () => {
     };
 
     fetchData();
+    // Set the tab title when the component mounts
+    document.title = "Explore Customer Events";
   }, [username]);
 
   
@@ -234,11 +238,13 @@ const ShareCustomerEvent = () => {
                       textDecoration: 'underline',
                       fontWeight:'bolder',
                       cursor: 'pointer',
-                     }} onClick={() =>handleClickToEdit(event.id)}>View More</div>
+                     }} onClick={() =>handleClickToEdit( event.groomName, event.brideName)}>View More</div>
                 </div>
-                <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Event Description: <p style={{fontWeight:'lighter',textTransform: 'capitalize'}}>{event.eventdescription}</p></p>
-                <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Event Date:<p style={{fontWeight:'lighter'}}> {event.eventdate}</p></p>
-                <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Event: <p style={{fontWeight:'lighter',textTransform: 'capitalize'}}>{event.event}</p></p>
+                {/* <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Event Description: <p style={{fontWeight:'lighter',textTransform: 'capitalize'}}>WEDDING INVITATION</p></p> */}
+                <p style={{ display: 'flex', justifyContent: 'center', fontWeight: 'bold' }}>WEDDING INVITATION</p>
+                <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Groom Name:<p style={{fontWeight:'lighter'}}> {event.groomName}</p></p>
+                <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Bride Name: <p style={{fontWeight:'lighter',textTransform: 'capitalize'}}>{event.brideName}</p></p>
+                <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold' }}>Wedding Date: <p style={{fontWeight:'lighter',textTransform: 'capitalize'}}>{event.weddingDate}</p></p>
               </div>
             </CardBody>
           </Card>

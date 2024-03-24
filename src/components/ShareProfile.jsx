@@ -32,6 +32,7 @@ const ShareProfile = () => {
         });
         setUserData(response.data.user);
         setLoading(false);
+        document.title = `Share Profile of ${response.data.user.name}`;
       } catch (error) {
         console.error("Error fetching user data:", error);
         setLoading(false);

@@ -1,8 +1,11 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Link } from "react-router-dom";
 import {  LOGO_URL,FOOTER_URL } from "../utilities/constants";
 const Home = (props) => {
-  //check if props is false
+  useEffect(() => {
+    // Set the tab title when the component mounts
+    document.title = "Home Page";
+  }, []);
   if (props.logout) {
     localStorage.removeItem("user");
   }

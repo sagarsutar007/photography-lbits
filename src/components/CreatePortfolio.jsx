@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import Topbar from "./Topbar/Topbar";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "../utilities/constants";
 
@@ -28,6 +28,10 @@ const getUser = () => {
     const [error, setError] = useState("");
     const navigate = useNavigate();
   
+    useEffect(() => {
+      // Set the tab title when the component mounts
+      document.title = "Create A New Portfolio";
+    }, []);
   
     const handleImageChange = (e) => {
       const files = Array.from(e.target.files);

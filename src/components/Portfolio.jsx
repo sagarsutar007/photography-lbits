@@ -122,6 +122,13 @@ const handleClick =(id)=>{
     };
     return (
       <div style={{ position: 'relative', marginBottom: '20px' }}>
+        {/* <div
+        className="prev-button"
+        style={{ cursor: 'pointer' }}
+        onClick={handlePrev}
+      >
+        &lt;
+      </div> */}
       <Carousel
         activeIndex={activeIndex}
         onSelect={handleSelect}
@@ -143,6 +150,13 @@ const handleClick =(id)=>{
               onClick={() => openModal(BACKEND_URL + "/assets/images/" + image.file_name)}
               style={{ cursor: 'pointer', width:'100%', maxHeight: '150px' }}
             />
+             {/* <div
+        className="next-button"
+        style={{ cursor: 'pointer' }}
+        onClick={handleNext}
+      >
+        &gt;
+      </div> */}
           </Carousel.Item>
         ))}
         {/* {images.length > 1 && (
@@ -247,7 +261,7 @@ const handleClick =(id)=>{
       <h5 style={{ marginTop: "35px", color: '#678983', fontFamily: 'sans-serif' }}>Portfolio</h5>
 
       {portfolio.map((portfolioItem, index) => (
-        <div key={portfolioItem.id} className="mb-4">
+        <div key={portfolioItem.id} className="mb-2">
           <div style={{ display:'flex', justifyContent:'space-between' }}>
             
                  <p style={{ textTransform: 'capitalize' }}>{portfolioItem.event}</p>
