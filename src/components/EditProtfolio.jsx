@@ -310,6 +310,7 @@ const EditProtfolio = () => {
   const [loading, setLoading] = useState(true);
   const [images, setImages] = useState([]);
   const [youtubeUrls, setYoutubeUrls] = useState("");
+  const [error, setError] = useState("");
   // const { username } = useParams();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -317,7 +318,7 @@ const EditProtfolio = () => {
   const navigate = useNavigate();
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
-
+ 
 // const handleDeleteImage = (index) => {
 //   setSelectedImageIndex(index);
 //   const isConfirmed = window.confirm("Are you sure you want to delete this image?");
@@ -420,10 +421,23 @@ const handleCancelDelete = () => {
     const { name, value } = e.target;
     setUserData((prevUserData) => ({ ...prevUserData, [name]: value }));
   };
-  const handleFileChange = (e) => {
-    const files = e.target.files;
-    setImages(Array.from(files));
+  const handleImageChange = (e) => {
+  
+    const files = Array.from(e.target.files);
+
+    if (files.length > 6) {
+      setError("Upload only 6 images.");
+      e.target.value = null;
+    } else {
+      setImages(prevImages => [...prevImages, ...files]);
+      setError(""); 
+    }
   };
+  // const handleView = () => {
+  
+  //   setDisplayImages(true);
+  // };
+
   const handleSave = async () => {
     // const userFromStorage = getUser();
     try {
@@ -433,62 +447,92 @@ const handleCancelDelete = () => {
       formData.append("event", userData.event || "");
       formData.append("location", userData.location || "");
       formData.append("eventdescription", userData.eventdescription|| "");
-      formData.append("YoutubeUrls", youtubeUrls || "");
-      formData.append("qualification", userData.qualification || "");
+      formData.append("Youtube_urls", youtubeUrls || "");
+      // formData.append("qualification", userData.qualification || "");
       formData.append("eventdate", userData.eventdate || "");
-
-        // Log the request payload for debugging
-   
-      // const files = fileInput.files;
-      // for (let i = 0; i < files.length; i++) {
-      //   formData.append(`portfolio_img[${i}]`, files[i]);
-      // }
       // const fileInput = document.getElementById("file");
 
+      // if (fileInput.files.length > 0) {
+      //   formData.append("protfolio_img", fileInput.files[0]);
+      // }
+      // const images = fileInput.files
+      // images.forEach((file, index) => {
+      //   formData.append(`portfolio_img[${index}]`, file);
+      // });
       images.forEach((file, index) => {
-        formData.append(`portfolio_img[${index}]`, file);
-      });
-      console.log('Request Payload:', formData);
-      const response = axios.put('http://localhost/chroma-cheer-b/update-portfolio', formData,{
-        headers: {
-          'Content-Type': 'application/json', // Set the content type if sending JSON
-        },
-      });
-      
-      if (response.data && response.data.status === 'SUCCESS') {
-        const portfolioData = response.data.result;
-  
-        if (portfolioData.images && portfolioData.images.length > 0 && portfolioData.images[0].file_name) {
-          const imageUrl = `http://localhost/chroma-cheer-b/assets/images/${portfolioData.images[0].file_name}`;
-          console.log('Image URL:', imageUrl);
+        // Check if file is valid
+        if (file && file.name) {
+            const currentDate = new Date();
+            const timestamp = currentDate.getTime(); // Get current timestamp
+    
+            // Extract file extension
+            const fileExtension = file.name.split('.').pop();
+    
+            // Construct new file name with timestamp
+            const newFileName = `file_${timestamp}.${fileExtension}`;
+    
+            // Create a new File object with the renamed file
+            const renamedFile = new File([file], newFileName, { type: file.type });
+    
+            // Append the renamed file to FormData
+            formData.append(`portfolio_img[${index}]`, renamedFile);
         } else {
-          console.error('Image URL not found in the response.');
+            console.error('Invalid file:', file);
         }
+    });
+      const response = await axios.post(
+        `${BACKEND_URL}update-portfolio?id=${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      const data = response.data;
+          if (data.status === "SUCCESS") {
+            navigate("/dashboard");
+          } else {
+            setError("Something went wrong!");
+          }
+        } catch (error) {
+          console.error("Error sending data:", error);
+        }
+      
+      // if (response.data && response.data.status === 'SUCCESS') {
+      //   const portfolioData = response.data.result;
   
-        // Format the date using JavaScript Date object or moment.js
-        const formattedDate = new Date(portfolioData.eventdate).toLocaleDateString();
-        console.log('Formatted Date:', formattedDate);
+      //   if (portfolioData.images && portfolioData.images.length > 0 && portfolioData.images[0].file_name) {
+      //     const imageUrl = `http://localhost/chroma-cheer-b/assets/images/${portfolioData.images[0].file_name}`;
+      //     console.log('Image URL:', imageUrl);
+      //   } else {
+      //     console.error('Image URL not found in the response.');
+      //   }
   
-        // Handle other success scenarios if needed
-      } else {
-        console.error('Error in the response:', response.data.message);
-      }
-    } catch (error) {
-      console.error('Error saving data:', error);
+      //   // Format the date using JavaScript Date object or moment.js
+      //   const formattedDate = new Date(portfolioData.eventdate).toLocaleDateString();
+      //   console.log('Formatted Date:', formattedDate);
   
-      // Handle specific error scenarios if needed
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        console.error('Server responded with:', error.response.status);
-        console.error('Response data:', error.response.data);
-      } else if (error.request) {
-        // The request was made but no response was received
-        console.error('No response received:', error.request);
-      } else {
-        // Something happened in setting up the request that triggered an error
-        console.error('Error setting up the request:', error.message);
-      }
-    }
+      //   // Handle other success scenarios if needed
+      // } else {
+      //   console.error('Error in the response:', response.data.message);
+      // }
+    // } catch (error) {
+    //   console.error('Error saving data:', error);
+  
+    //   // Handle specific error scenarios if needed
+    //   if (error.response) {
+    //     // The request was made and the server responded with a status code
+    //     console.error('Server responded with:', error.response.status);
+    //     console.error('Response data:', error.response.data);
+    //   } else if (error.request) {
+    //     // The request was made but no response was received
+    //     console.error('No response received:', error.request);
+    //   } else {
+    //     // Something happened in setting up the request that triggered an error
+    //     console.error('Error setting up the request:', error.message);
+    //   }
+    // }
   };
   
       // console.log('Axios Config:', {
@@ -634,13 +678,12 @@ const handleCancelDelete = () => {
             </label>
           </div>
           <div className="col-9">
-            <input
+          <input
               type="file"
-              name="event_media"
-              id="file"
+              id="Event Media"
+              multiple
+              onChange={handleImageChange}
               className="form-control bg-light-grey border-0 fs-12"
-              onChange={handleFileChange} // Make sure to add the onChange handler
-              // multiple // Allow selecting multiple files
             />
             {images && images.length > 0 && (
       <div className="my-2">
@@ -702,6 +745,7 @@ const handleCancelDelete = () => {
               type="link"
               name="Youtube URL"
               id="Youtube URL"
+              placeholder="No Youtube Url"
               value={loading ? "Loading..." : youtubeUrls || ""}
               // onChange={(e) => setYoutubeUrls(e.target.value)}
               onChange={handleInputChange}

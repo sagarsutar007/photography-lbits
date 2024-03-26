@@ -8,7 +8,6 @@ import { useParams,useLocation, useNavigate } from "react-router-dom";
 // import Modal from 'react-modal';
 import { Helmet } from "react-helmet-async";
 
-
 const getUser = () => {
   let user = localStorage.getItem("user");
   if (user) return true;
@@ -16,103 +15,6 @@ const getUser = () => {
   return false;
 
 };
-
-
-// const timelineData = [
-  // { date: " NOVEMBER 5TH, 9:00 AM ONWARDS", title: "Groom Making", description: "Warangal Groom home", imageUrl:"https://i.postimg.cc/3xSRrDG9/gh.png" },
-  // { date: " NOVEMBER 5TH, 11:00 AM ONWARDS", title: "Groom Haldi", description: "Warangal Groom home",imageUrl:"https://i.postimg.cc/HxwVd3SV/gm.png" },
-  // { date: "NOVEMBER 7TH, 9:00 AM ONWARDS", title: "Bride Haldi", description: "Chilkaluripet Bride Home",imageUrl:"https://i.postimg.cc/TYqFgbsg/gh1.png" },
-  // { date: "NOVEMBER 7TH, 5:00 PM ONWARDS", title: "Mehendi", description: "Chilkaluripet Bride Home",imageUrl:"https://i.postimg.cc/TwDHw5my/gh2.png "},
-  // { date: "NOVEMBER 8TH, 7:00 AM ONWARDS", title: "Pellikuthuru Making", description: "Chilkaluripet Bride Home",imageUrl:"https://i.postimg.cc/BvyV4B89/gh3.png" },
-  // { date: "NOVEMBER 8TH, 9:54 PM ONWARDS", title: "Wedding", description: "A1 Function Hall SR Nagar Main Road,Hyderabad",imageUrl:"https://i.postimg.cc/N0Lz3zjk/gh4.png" },
-  // { date: " NOVEMBER 10TH, 7:00 PM ONWARDS", title: "Reception", description: "Assuntha Bhavan, Opp. D-Mart, Hanumakonda.",imageUrl:"https://i.postimg.cc/7hrtTPMK/gh5.png" }
-// ];
-// const TimelineEvent = ({ date, title, description, imageUrl }) => (
-//   <div className="timeline-event" style={{ width: '300px',height:'220px',marginBottom: '20px', padding: '15px', backgroundColor: '#fff', borderRadius: '5px', boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)', position: 'relative' }}>
-//     <div className="event-date" style={{ fontSize: '12px', fontWeight: 'bold',backgroundColor:'#EABF86',textTransform:'uppercase',color:'#fff',fontFamily:'"Alice", Sans-serif',padding:'5px' }}> <Icon.ClockFill size={18} />{date}</div>
-//     <div className="event-content" style={{ marginBottom: '100px' }}>
-//       <div className="event-title" style={{ fontSize: '26px', marginBottom: '10px', color: '#333',fontFamily:'"Alice", Sans-serif' }}>{title}</div>
-//       <p className="event-description" style={{ fontSize: '16px', color: '#7A7A7A',fontWeight:'400',boxSizing:'border-box',overflow: 'hidden', textOverflow: 'ellipsis', maxHeight: '100px' }}>{description}</p>
-//     </div>
-//     {imageUrl && (
-//       <div className="event-image" style={{ position: 'absolute', bottom: '5px', right: '2px', width: '100px', height: '100px', objectFit: 'cover', borderRadius: '50%' }}>
-//         <img src={imageUrl} alt="Event" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%', left: '10px' }} />
-//       </div>
-//     )}
-//   </div>
-// );
-
-// // Component for rendering the entire timeline
-// const Timeline = ({ events }) => (
-//   <ul className="timeline" style={{ listStyle: 'none', paddingLeft: 0 }}>
-//     {events.map((event, index) => (
-//       <li key={index} style={{ position: 'relative', display: 'flex', marginBottom: '20px' }}>
-//         <div className="bullet" style={{ width: '10px', height: '10px', backgroundColor: '#EABF86', borderRadius: '50%', marginRight: '20px' }} />
-//         <div>
-//           <TimelineEvent {...event} />
-//         </div>
-//       </li>
-//     ))}
-//   </ul>
-// );
-
-// const Carousel = ({ images }) => {
-//   const [currentIndex, setCurrentIndex] = useState(0);
-
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-//     }, 3000); // Change image every 3 seconds (adjust as needed)
-
-//     return () => clearInterval(interval);
-//   }, [images.length]);
-
-//   return (
-//     <div style={carouselContainerStyle}>
-//       {images.map((imageUrl, index) => (
-//         <img
-//           key={index}
-//           src={imageUrl}
-//           alt={`Slide ${index + 1}`}
-//           style={{
-//             ...imageStyle,
-            // opacity: index === currentIndex ? 1 : 0,
-            // transition: "opacity 1s ease-in-out",
-            // clipPath: "circle(45% at center)",
-//           }}
-//         />
-//       ))}
-//     </div>
-//   );
-// };
-
-// const carouselContainerStyle = {
-//   position: "relative",
-//   width: "100%",
-//   height: "400px", // Adjust height as needed
-//   overflow: "hidden",
-// };
-
-
-// const imageStyle = {
-//   position: "absolute",
-//   top: 0,
-//   left: 0,
-//   width: "100%",
-//   height: "100%",
-//   objectFit: "cover",
-// };
-// const imagePath = BACKEND_URL + "/assets/images/" ;
-// const images = [
-//   imagePath + "p1.jpeg",
-//   imagePath + "p2.jpg",
-//   imagePath + "p3.jpg",
-//   imagePath + "p4.jpg",
-//   imagePath + "p5.jpg",
-//   imagePath + "p6.jpg"
-
-// ];
-
 
 
 
@@ -233,14 +135,21 @@ if (customer.ReceptionDate && customer.ReceptionTime != "00:00:00") {
       ))}
     </ul>
   );
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (customer && customer.images) {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % customer.images.length);
-   } }, 3000); // Change image every 3 seconds (adjust as needed)
+  
 
-    return () => clearInterval(interval);
-  }, [customer]);
+  useEffect(() => {
+    if (customer.images && customer.images.length > 0) {
+      const interval = setInterval(() => {
+        setCurrentIndex(prevIndex => (prevIndex + 1) % (customer.images.length-1));
+      }, 3000); // Change image every 3 seconds (adjust as needed)
+  
+      return () => clearInterval(interval);
+    }
+  }, [customer.images]);
+  
+
+  
+  
   const carouselContainerStyle = {
     position: "relative",
     width: "100%",
@@ -256,44 +165,6 @@ if (customer.ReceptionDate && customer.ReceptionTime != "00:00:00") {
     height: "100%",
     objectFit: "cover",
   };
-
-  // useEffect(() => {
-  //   const fetchImages = async () => {
-  //     try {
-  //       const response = await axios.get(BACKEND_URL + "/assets/images/" + images.file_name); // Adjust the endpoint URL accordingly
-  //       setImages(response.data.images); // Assuming the response data contains an array of image URLs
-  //     } catch (error) {
-  //       console.error('Error fetching images:', error);
-  //     }
-  //   };
-
-  //   fetchImages();
-
-  //   const interval = setInterval(() => {
-  //     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  //   }, 3000); // Change image every 3 seconds (adjust as needed)
-
-  //   return () => clearInterval(interval);
-  // }, []);
-
-  // return (
-  //   <div style={carouselContainerStyle}>
-  //     {images.map((imageUrl, index) => (
-  //       <img
-  //         key={index}
-  //         src={imageUrl}
-  //         alt={`Slide ${index + 1}`}
-  //         style={{
-  //           ...imageStyle,
-  //           opacity: index === currentIndex ? 1 : 0,
-  //           transition: "opacity 1s ease-in-out",
-  //           clipPath: "circle(45% at center)",
-  //         }}
-  //       />
-  //     ))}
-  //   </div>
-  // );
-  
   
   useEffect(() => {
     const fetchData = async () => {
@@ -328,27 +199,9 @@ if (customer.ReceptionDate && customer.ReceptionTime != "00:00:00") {
         setModalImage('');
         setModalIsOpen(false);
       };
-      // const handleClick = (type) => {
-      //   if (type === "dashboard") {
-      //     navigate("/dashboard");
-      //   }
-      // };
-      // const generateShareLink = () => {
-      //  // Construct the shareable link based on the current state of the customer object
-      //  if (!modalImage) {
-      //   // Construct the shareable link based on the current state of the customer object
-      //   const link = `${window.location.origin}/share-event?id=${customer.id}`;
-      //   setShareableLink(link);
-      // }
-      // };
-      // const copyToClipboard = () => {
-      //   if (shareableLink) {
-      //     navigator.clipboard.writeText(shareableLink);
-      //     alert("Link copied to clipboard!");
-      //   }
-      // };
-      
-    
+      const link = `${window.location.origin}/share-event/ ${encodeURIComponent(customer.groomName)}&${encodeURIComponent(customer.brideName)}-wedding-Invitation}`;
+     
+     
 
 useEffect(() => {
     const handleScroll = () => {
@@ -398,19 +251,30 @@ function formatDate(inputDateString) {
   const date = new Date(inputDateString);
   
   // Months array for converting month index to month name
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   
   // Extract year, month (as index), and day from the Date object
-  // const year = date.getFullYear();
+  const year = date.getFullYear();
   const monthIndex = date.getMonth();
   const day = date.getDate();
   
   // Convert month index to month name
   const monthName = months[monthIndex];
   
+  // Append 'st', 'nd', 'rd', or 'th' to day based on its value
+  let daySuffix;
+  if (day === 1 || day === 21 || day === 31) {
+    daySuffix = 'st';
+  } else if (day === 2 || day === 22) {
+    daySuffix = 'nd';
+  } else if (day === 3 || day === 23) {
+    daySuffix = 'rd';
+  } else {
+    daySuffix = 'th';
+  }
+
   // Construct the formatted date string
-  // const formattedDateString = `${year} ${monthName} ${day}`;
-  const formattedDateString = ` ${monthName} ${day}`;
+  const formattedDateString = `${day}${daySuffix} ${monthName} ${year}`;
 
   return formattedDateString;
 }
@@ -427,13 +291,12 @@ function formatDate(inputDateString) {
     <>
     <Helmet>
         <title>{type}</title>
-        <meta property="og:title" content="Sai & Pavani's Wedding Invitation" />
-        <meta property="og:description" content="Join us in celebrating the wedding of Sai and Pavani!" />
-        <meta property="og:image" content="https://i.postimg.cc/0jdh42zf/m6.jpg" /> 
-        <meta property="og:url" content="https://chromagz.com/sai-pavani-wedding-invitation" />
+        <meta property="og:title" content={`${customer.groomName} &${customer.brideName}'s Wedding Invitation`} />
+        <meta property="og:description" content={`Join us in celebrating the wedding of ${customer.groomName} and ${customer.brideName}`} />
+        {/* <meta property="og:image" content={`${BACKEND_URL}/assets/images/${customer.images[0].file_name}`} />  */}
+        <meta property="og:url" content={link} />
       </Helmet>
 
-      {/* {type ===  customer.groomName+ "-" + customer.brideName+ "-"+" Wedding Invitation" } */}
     <div style={{marginTop:'10px'}}>
     
            <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
@@ -464,7 +327,7 @@ function formatDate(inputDateString) {
             <h6 style={{ fontSize: '14px',lineHeight:'1.2rem',fontFamily:'"Nanum Myeongjo", Sans-serif',boxSizing:'border-box' }}>{customer.weddingLocation}</h6>
             {/* <p style={{ fontSize: '18px' }}>SR Nagar Main Road,<br/> Hyderabad</p> */}
           </div>
-          <div style={{ padding: '25px', textAlign: 'center' ,fontWeight:'bold'}}>
+          <div style={{ padding: '10px', textAlign: 'center' ,fontWeight:'bold'}}>
             <h2 style={{ fontSize: '20px',lineHeight:'1.2rem',fontWeight:'800' }}>{convertTimeToAMPM(customer.weddingTime)}</h2>
           </div>
         </div>
@@ -538,27 +401,30 @@ function formatDate(inputDateString) {
     </div>
     {/* <div  style={carouselContainerStyle}>
     <Carousel images={images} />
-    </div> */}
-    <div style={carouselContainerStyle}>
+    </div> */} 
+     <div style={carouselContainerStyle}>
 
-    {customer.images && customer.images.slice(1).map((image, index) => (
-      <img
-      key={index}
-      src={`${BACKEND_URL}/assets/images/${image.file_name}`}
-      className="mb-4"
-      width="100%"
-      height="auto"
-      alt={`Slide ${index + 1}`}
-          style={{
-            ...imageStyle,
-            opacity: index === currentIndex ? 1 : 0,
-            transition: "opacity 1s ease-in-out",
-            clipPath: "circle(45% at center)",
-          }}
-      onClick={() => openModal(`${BACKEND_URL}/assets/images/${image.file_name}`)}
-    />
-  ))}
+     {customer.images && customer.images.slice(1).map((image, index) => (
+  <img
+    key={index}
+    src={`${BACKEND_URL}/assets/images/${image.file_name}`}
+    className={`mb-4 ${customer.images.length > 1 && (currentIndex === 0 || currentIndex === customer.images.length - 1) ? 'image-transition' : ''}`}
+    width="100%"
+    height="auto"
+    alt={`Slide ${index + 1}`}
+    style={{
+      ...imageStyle,
+      opacity: index === currentIndex ? 1: 0,
+      transition: "opacity 1s ease-in-out",
+      clipPath: "circle(45% at center)",
+    }}
+    onClick={() => openModal(`${BACKEND_URL}/assets/images/${image.file_name}`)}
+  />
+))}
+
   </div>
+
+
     
     <div>
           
@@ -600,7 +466,7 @@ function formatDate(inputDateString) {
       <div  style={{ position: 'absolute', top: '15%', left:'10%', textAlign: 'center',transform: 'translateX(-50%)', opacity: isVisible ? 1 : 0, animation: isVisible ? 'fade-in-bottom 2s forwards' : 'none'  }}>
         <p style={{ fontSize: '14px', fontWeight: '600', letterSpacing: '3px', lineHeight: '1', boxSizing: 'border-box', margin: 0 }}>THE WEDDING CEREMONY OF</p>
         <h2 style={{ fontFamily: '"Alex Brush", Sans-serif', lineHeight: '1', fontSize: '2rem', margin: '10px 0' }}>{customer.groomName} & {customer.brideName}</h2>
-        <p style={{ fontSize:'14px',fontWeight:'600',letterSpacing:'3px',lineHeight:'1',boxSizing:'border-box',color:'#000' }}>{customer.weddingDate}</p>
+        <p style={{ fontSize:'14px',fontWeight:'600',letterSpacing:'3px',lineHeight:'1',boxSizing:'border-box',color:'#000' }}>{formatDate(customer.weddingDate)}</p>
     </div>
     </div>
     <div className="mt-3">
