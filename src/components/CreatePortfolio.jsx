@@ -92,15 +92,17 @@ const validateYoutubeURL = (url) => {
         formData.append("YoutubeURLs", extractYoutubeVideoId(Youtubeurls));
         formData.append("eventdate", eventdate);
 
-        if (Youtubeurls.trim() !== "") {
-          const videoId = extractYoutubeVideoId(Youtubeurls);
-          if (videoId) {
-            formData.append("YoutubeURLs", videoId);
-          } else {
-            setError("Invalid YouTube URL. Please enter a valid YouTube URL.");
-            return;
-          }
-        }
+        // if (Youtubeurls.trim() !== "") {
+        //   const videoId = extractYoutubeVideoId(Youtubeurls);
+        //   if (videoId) {
+        //     formData.append("YoutubeURLs", videoId);
+        //   } else {
+        //     setError("Invalid YouTube URL. Please enter a valid YouTube URL.");
+        //     return;
+        //   }
+        // }
+        const youtubeURL = Youtubeurls.trim() !== "" ? extractYoutubeVideoId(Youtubeurls) : "";
+        formData.append("YoutubeURLs", youtubeURL);
        
         images.forEach((file, index) => {
           formData.append(`portfolio_img[${index}]`, file);
